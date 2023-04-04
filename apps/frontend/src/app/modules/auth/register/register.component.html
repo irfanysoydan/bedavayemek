@@ -1,0 +1,64 @@
+<div class="flex flex-row w-full h-screen items-center ">
+  <div class="flex w-1/2 mb-32 flex-shrink-0">
+    <div class=" 2xl:w-5/12 sm:w-1/4"></div>
+    <form class="flex flex-col lg:w-6/12 lg:w-2/4 ">
+
+      <div class="flex 2xl:mb-20 lg:mb-5 justify-center">
+        <img src="../../../../assets/logo_small.png" alt="">
+      </div>
+
+      <mat-form-field class="sm: text-sm lg:text-lg">
+        <mat-label>Adınız</mat-label>
+        <input matInput placeholder="Adınızı giriniz." type="text" #firstName>
+
+      </mat-form-field>
+
+      <mat-form-field class="sm: text-sm lg:text-lg">
+        <mat-label>Soyadınız</mat-label>
+        <input matInput placeholder="Soyadınızı giriniz." type="text" #lastName>
+
+      </mat-form-field>
+
+      <mat-form-field class="sm: text-sm lg:text-lg">
+        <mat-label>E-posta adresiniz</mat-label>
+        <input matInput placeholder="E-posta adresinizi giriniz." type="email" #email>
+
+      </mat-form-field>
+      <div class="flex flex-row justify-between space-x-4">
+
+        <mat-form-field class="sm:text-sm lg:text-lg">
+          <mat-label>Şifre</mat-label>
+          <input matInput maxlength="10" placeholder="Şifrenizi giriniz." type="password" #password>
+
+        </mat-form-field>
+
+        <mat-form-field class="sm:text-sm lg:text-lg">
+          <mat-label>Şifre(Tekrar)</mat-label>
+          <input matInput maxlength="10" placeholder="Şifrenizi giriniz." type="password">
+
+        </mat-form-field>
+      </div>
+
+
+
+      <button mat-raised-button color="accent"
+        (click)="register(firstName.value,lastName.value,email.value,password.value)"><a
+          class="text-sm text-black uppercase">Kaydol</a></button>
+
+      <div class="flex 2xl:flex-row sm:flex-col 2xl:justify-center 2xl:mt-5 sm:mt-2 ">
+
+        <button mat-button>
+          <a href="/login" class="text-sm text-primary">Hesabın Var Mı?</a>
+        </button>
+
+      </div>
+
+    </form>
+    <div class="2xl:w-1/12 sm:w-1/4"></div>
+
+  </div>
+
+  <div class="w-1/2 h-full hidden sm:block ">
+    <img class="object-cover w-full h-full" src="../../../../assets/login.jpg">
+  </div>
+</div>z
