@@ -1,7 +1,7 @@
 <div class="flex flex-row w-full h-screen items-center ">
   <div class="flex w-1/2 mb-32 flex-shrink-0">
     <div class=" 2xl:w-5/12 sm:w-1/4"></div>
-    <form class="flex flex-col lg:w-6/12 lg:w-2/4 ">
+    <form class="flex flex-col lg:w-6/12 lg:w-2/4" [formGroup]="form">
 
       <div class="flex 2xl:mb-20 lg:mb-5 justify-center">
         <img src="../../../../assets/logo_small.png" alt="">
@@ -9,17 +9,17 @@
 
       <mat-form-field class="sm: text-sm lg:text-lg">
         <mat-label>E-posta</mat-label>
-        <input matInput placeholder="E-posta adresinizi giriniz." type="email">
+        <input matInput placeholder="E-posta adresinizi giriniz." type="email" formControlName="email">
 
       </mat-form-field>
 
       <mat-form-field class="sm:text-sm lg:text-lg">
         <mat-label>Şifre</mat-label>
-        <input matInput maxlength="10" placeholder="Şifrenizi giriniz." type="password">
+        <input matInput maxlength="10" placeholder="Şifrenizi giriniz." type="password" formControlName="password">
 
       </mat-form-field>
 
-      <button mat-raised-button color="accent"><a href="/" class="text-sm text-black uppercase">Giriş
+      <button mat-raised-button type="button" (click)="login()" color="accent"><a class="text-sm text-black uppercase">Giriş
           Yap</a></button>
 
       <div class="flex 2xl:flex-row sm:flex-col 2xl:justify-between items-center 2xl:mt-5 sm:mt-2 ">

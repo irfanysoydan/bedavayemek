@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { ConflictException, Injectable, UseInterceptors } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Auth, AuthDocument } from './entities/auth.entity';
@@ -10,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginDto } from './dto/login.dto';
+import { ApiResponse } from '../_core/response/api-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -18,9 +15,9 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async create(createAuthDto: CreateAuthDto): Promise<Auth> {
+  async create(createAuthDto: CreateAuthDto): Promise<ApiResponse<Auth>> {
     try {
-      const {  firstName, lastName ,email, password} = createAuthDto;
+      const { firstName, lastName, email, password } = createAuthDto;
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
       const user = await this.authModel.create({
@@ -30,17 +27,34 @@ export class AuthService {
         password: hashedPassword,
       });
 
-      return user;
+      return {
+        data: user,
+        message: 'Kayıt işlemi başarılı.',
+        statusCode: 201,
+        isSuccessful: true,
+      };
     } catch (error) {
       if (error.code === 11000) {
-        throw new ConflictException('Email already exists');
+        return {
+          data: null,
+          message: 'Bu email adresi zaten kullanılmaktadır.',
+          statusCode: 409,
+          isSuccessful: false,
+        };
       } else {
-        throw new InternalServerErrorException();
+        return {
+          data: null,
+          message: 'Bir hata oluştu. Lütfen tekrar deneyiniz.',
+          statusCode: 500,
+          isSuccessful: false,
+        };
       }
     }
   }
 
-  async login(loginDto: LoginDto): Promise<{ accessToken: string }> {
+  async login(
+    loginDto: LoginDto
+  ): Promise<ApiResponse<{ accessToken: string }>> {
     const { email, password } = loginDto;
     const user = await this.authModel.findOne({ email, isActive: true }).exec();
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -50,9 +64,19 @@ export class AuthService {
         expiresIn: '1d',
       });
 
-      return { accessToken };
+      return {
+        data: { accessToken },
+        message: 'Giriş Başarılı',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } else {
-      throw new ConflictException('Kullanıcı Bilgileri Hatalı');
+      return {
+        data: null,
+        message: 'Kullanıcı adı veya şifre hatalı.',
+        statusCode: 401,
+        isSuccessful: false,
+      };
     }
   }
 }

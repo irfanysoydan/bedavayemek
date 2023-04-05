@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Auth } from '../models/auth.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ResponseModel } from '../models/response.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,9 +14,17 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  apiUrl = 'http://localhost:3333/';
+  apiUrl = 'http://localhost:3333/api/';
 
-  registerService(auth: Auth): Observable<any> {
+  registerService(auth: Auth): Observable<ResponseModel> {
     return this.http.post<any>(this.apiUrl + 'auth/register', auth);
+  }
+
+  loginService(auth: Auth): Observable<ResponseModel> {
+    return this.http.post<any>(this.apiUrl + 'auth/login', auth);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
 }
