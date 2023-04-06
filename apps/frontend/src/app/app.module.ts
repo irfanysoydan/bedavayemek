@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
+import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { HomeComponent } from './modules/home/home.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
@@ -27,6 +28,7 @@ import { MainComponent } from './modules/main/main.component';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
+    HeaderAuthComponent,
     RegisterComponent,
     MainComponent,
   ],

@@ -1,4 +1,5 @@
 <div class="inset-0 fixed overflow-hidden font-sans">
-  <bedavayemek-header></bedavayemek-header>
+  <bedavayemek-header *ngIf="!authService.isLoggedIn()"></bedavayemek-header>
+  <bedavayemek-header-auth *ngIf="authService.isLoggedIn()"></bedavayemek-header-auth>
   <router-outlet></router-outlet>
 </div>

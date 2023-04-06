@@ -1,4 +1,4 @@
-<!-- Header Unauthorized -->
+<!-- Header Authorized -->
 <mat-toolbar class="bg-primary text-white lg:h-20 md:h-16">
   <div class="flex w-full items-center h-full md:hidden">
     <button
@@ -30,7 +30,7 @@
 
     <div class="flex-1"></div>
 
-    <button
+    <!-- <button
       class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
       <span class="mr-1 flex items-center">
         <i class="material-icons text-lg">phone</i>
@@ -44,18 +44,19 @@
         <i class="material-icons text-lg">article</i>
       </span>
       <span>Hakkımızda</span>
-    </button>
+    </button> -->
 
-    <a href="/login">
+    <a>
       <button
-        class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+        class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1"
+        (click)="logout()">
         <span class="mr-1 flex items-center h-full">
-          <i class="material-icons text-lg">login</i>
+          <i class="material-icons text-lg">logout</i>
         </span>
-        <span>Giriş Yap</span>
+        <span>Çıkış Yap</span>
       </button>
     </a>
 
   </div>
 </mat-toolbar>
-<!-- Header Unauthorized -->
+<!-- Header Authorized -->

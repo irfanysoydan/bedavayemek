@@ -26,4 +26,3 @@ export class AuthGuard implements CanActivate {
     return false;
   }
 }
-//Auth guard işlenmesinde kaldıım buradan devam et chatgpt aç
