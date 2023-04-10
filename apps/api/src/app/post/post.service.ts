@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Auth, AuthDocument } from '../auth/entities/auth.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post, PostDocument } from './entities/post.entity';
+import { ApiResponse } from '../_core/response/api-response.dto';
 
 @Injectable()
 export class PostService {
@@ -27,11 +28,16 @@ export class PostService {
     }
   }
 
-  async getPosts(): Promise<Post[]> {
+  async getPosts(): Promise<ApiResponse<Post[]>> {
     try {
-      const posts = await this.postModel.find({ isActive: true }).exec();
+      const posts = await this.postModel.find({ isActive: true }).populate("auth").exec();
 
-      return posts;
+      return {
+        data: posts,
+        message: 'İşlem başarılı.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }

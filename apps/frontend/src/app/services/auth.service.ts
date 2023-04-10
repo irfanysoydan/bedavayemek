@@ -17,11 +17,11 @@ export class AuthService {
   apiUrl = 'http://localhost:3333/api/';
 
   registerService(auth: Auth): Observable<ResponseModel> {
-    return this.http.post<any>(this.apiUrl + 'auth/register', auth);
+    return this.http.post<ResponseModel>(this.apiUrl + 'auth/register', auth);
   }
 
   loginService(auth: Auth): Observable<ResponseModel> {
-    return this.http.post<any>(this.apiUrl + 'auth/login', auth);
+    return this.http.post<ResponseModel>(this.apiUrl + 'auth/login', auth);
   }
 
   isLoggedIn(): boolean {

@@ -25,6 +25,7 @@ export class AuthService {
         lastName,
         email,
         password: hashedPassword,
+        avatar: "",
       });
 
       return {

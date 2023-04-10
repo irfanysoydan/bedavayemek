@@ -14,6 +14,7 @@ import { GetUser } from '../auth/decorators/get-user.decorator';
 import { Auth } from '../auth/entities/auth.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
+import { ApiResponse } from '../_core/response/api-response.dto';
 
 @Controller('post')
 @UseGuards(AuthGuard('jwt'))
@@ -29,7 +30,7 @@ export class PostController {
   }
 
   @Get()
-  async getPosts(): Promise<Postie[]> {
+  async getPosts(): Promise<ApiResponse<Postie[]>> {
     return await this.postService.getPosts();
   }
 

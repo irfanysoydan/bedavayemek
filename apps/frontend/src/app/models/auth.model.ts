@@ -5,6 +5,7 @@ export class Auth {
   email?: string | null;
   password?: string | null;
   rating?: number;
+  avatar?: string;
   isActive?: boolean;
   createdAt?: Date;
   updateAt?: Date;
