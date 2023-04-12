@@ -13,6 +13,9 @@ export class Auth {
   lastName: string;
 
   @Prop({ unique: true })
+  username: string;
+
+  @Prop({ unique: true })
   email: string;
 
   @Prop()

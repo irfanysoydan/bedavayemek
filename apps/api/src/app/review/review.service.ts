@@ -8,6 +8,7 @@ import { Model } from 'mongoose';
 import { Auth } from '../auth/entities/auth.entity';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review, ReviewDocument } from './entities/review.entity';
+import { ApiResponse } from '../_core/response/api-response.dto';
 
 @Injectable()
 export class ReviewService {
@@ -19,20 +20,30 @@ export class ReviewService {
     createReviewDto: CreateReviewDto,
     auth: Auth,
     postId: string
-  ): Promise<Review> {
+  ): Promise<ApiResponse<Review>> {
     try {
-      const { rating, comment, images } = createReviewDto;
+      const { rating, comment, image } = createReviewDto;
       const review = await this.reviewModel.create({
         rating,
         comment,
-        images,
+        image,
         auth,
         post: postId,
       });
 
-      return review;
+      return {
+        data: review,
+        message: 'Yorum ekleme işlemi başarılı.',
+        statusCode: 201,
+        isSuccessful: true,
+      };
     } catch (error) {
-      throw new InternalServerErrorException();
+      return {
+        data: null,
+        message: 'Bir hata oluştu. Lütfen tekrar deneyiniz.',
+        statusCode: 500,
+        isSuccessful: false,
+      };
     }
   }
 
@@ -60,13 +71,21 @@ export class ReviewService {
     }
   }
 
-  async getReviewsByPostId(postId: string): Promise<Review[]> {
+  async getReviewsByPostId(postId: string): Promise<ApiResponse<Review[]>> {
     try {
-      const reviews = await this.reviewModel.find({ post: postId }).exec();
+      const reviews = await this.reviewModel
+        .find({ post: postId })
+        .populate('auth')
+        .exec();
 
       if (!reviews) throw new NotFoundException('Reviews not found!');
 
-      return reviews;
+      return {
+        data: reviews,
+        message: 'Yorumlar başarıyla getirildi.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
@@ -78,11 +97,11 @@ export class ReviewService {
     auth: any
   ): Promise<Review> {
     try {
-      const { rating, comment, images } = updateReviewDto;
+      const { rating, comment, image } = updateReviewDto;
       const review = await this.reviewModel
         .findOneAndUpdate(
           { _id: id, auth: auth._id },
-          { rating, comment, images },
+          { rating, comment, image },
           { new: true }
         )
         .exec();

@@ -17,15 +17,16 @@ export class AuthService {
 
   async create(createAuthDto: CreateAuthDto): Promise<ApiResponse<Auth>> {
     try {
-      const { firstName, lastName, email, password } = createAuthDto;
+      const { firstName, lastName, username, email, password } = createAuthDto;
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
       const user = await this.authModel.create({
         firstName,
         lastName,
+        username,
         email,
         password: hashedPassword,
-        avatar: "",
+        avatar: '',
       });
 
       return {

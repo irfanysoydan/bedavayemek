@@ -10,11 +10,11 @@ export class Review {
   @Prop()
   rating: number;
 
-  @Prop()
+  @Prop({ required: true })
   comment: string;
 
   @Prop()
-  images: string[];
+  image: string;
 
   @Prop({ default: true })
   isActive: boolean;

@@ -1,7 +1,7 @@
 import { Auth } from './auth.model';
 
 export class Post {
-  id?: string;
+  id!: string ;
   title?: string;
   description?: string;
   image?: string;

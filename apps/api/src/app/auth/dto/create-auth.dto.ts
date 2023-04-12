@@ -14,6 +14,11 @@ export class CreateAuthDto {
 
   @IsString()
   @MinLength(4)
+  @MaxLength(20)
+  username: string;
+
+  @IsString()
+  @MinLength(4)
   @MaxLength(60)
   @IsEmail()
   email: string;

@@ -7,6 +7,6 @@ export class CreateReviewDto {
   @IsString()
   comment: string;
 
-  @IsString({ each: true }) //each kelimesi ile array içindeki her bir elemanın string olması gerektiğini belirtiyoruz.
-  images: string[];
+  @IsString() //each kelimesi ile array içindeki her bir elemanın string olması gerektiğini belirtiyoruz.
+  image: string;
 }

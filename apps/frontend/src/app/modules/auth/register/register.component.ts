@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   form = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
+    username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -36,6 +37,7 @@ export class RegisterComponent implements OnInit {
     const auth: Auth = {
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
+      username: this.form.value.username,
       email: this.form.value.email,
       password: this.form.value.password,
     };

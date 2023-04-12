@@ -1,62 +1,52 @@
-<!-- Header Authorized -->
-<mat-toolbar class="bg-primary text-white lg:h-20 md:h-16">
-  <div class="flex w-full items-center h-full md:hidden">
-    <button
-      class="flex flex-row items-center text-base px-4 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2]">
-      <i class="material-icons text-2xl">menu</i>
-    </button>
+<header class="bg-primary text-white shadow h-20 flex items-center justify-center">
+  <nav class="mx-8 px-4 py-2 flex justify-between items-center flex-1">
+    <a routerLink="/" class="text-xl font-bold">BedavaYemek.com</a>
 
-    <div class="flex-1"></div>
-
-    <a href="/" class="flex items-center px-4">
-      <button>
-        <span>BedavaYemek.com</span>
-      </button>
-    </a>
-
-
-  </div>
-
-  <div class="flex w-full h-full lg:mx-20 md:mx-0 md:flex md:flex-row hidden md:block">
-
-
-    <a href="/" class="flex items-center px-4">
-      <button>
-        <span>BedavaYemek.com</span>
-      </button>
-    </a>
-
-
-
-    <div class="flex-1"></div>
-
-    <!-- <button
-      class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
-      <span class="mr-1 flex items-center">
-        <i class="material-icons text-lg">phone</i>
-      </span>
-      <span>İletişim</span>
-    </button>
-
-    <button
-      class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
-      <span class="mr-1 flex items-center">
-        <i class="material-icons text-lg">article</i>
-      </span>
-      <span>Hakkımızda</span>
-    </button> -->
-
-    <a>
-      <button
-        class="flex flex-row items-center text-base px-5 h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1"
-        (click)="logout()">
-        <span class="mr-1 flex items-center h-full">
-          <i class="material-icons text-lg">logout</i>
-        </span>
-        <span>Çıkış Yap</span>
-      </button>
-    </a>
-
-  </div>
-</mat-toolbar>
-<!-- Header Authorized -->
+    <ul class="flex text-base">
+      <li class="ml-6 flex items-center">
+        <a href="">
+          <button
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            <span class="mr-1 flex items-center">
+              <i class="material-icons text-lg">home</i>
+            </span>
+            <span>Anasayfa</span>
+          </button>
+        </a>
+      </li>
+      <li class="ml-6">
+        <a href="">
+          <button
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            <span class="mr-1 flex items-center">
+              <i class="material-icons text-lg">article</i>
+            </span>
+            <span>Hakkımızda</span>
+          </button>
+        </a>
+      </li>
+      <li class="ml-6">
+        <a href="">
+          <button
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            <span class="mr-1 flex items-center">
+              <i class="material-icons text-lg">phone</i>
+            </span>
+            <span>İletişim</span>
+          </button>
+        </a>
+      </li>
+      <li class="ml-6">
+        <a href="">
+          <button
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1" (click)="logout()">
+            <span class="mr-1 flex items-center">
+              <i class="material-icons text-lg">logout</i>
+            </span>
+            <span>Çıkış Yap</span>
+          </button>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

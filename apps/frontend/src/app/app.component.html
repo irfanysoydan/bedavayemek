@@ -1,5 +1,7 @@
-<div class="font-sans">
-  <bedavayemek-header *ngIf="!authService.isLoggedIn()"></bedavayemek-header>
-  <bedavayemek-header-auth *ngIf="authService.isLoggedIn()"></bedavayemek-header-auth>
+<div class="overflow-hidden">
+  <bedavayemek-header *ngIf="!authService.isLoggedIn()" class="font-comfortaa relative z-20"></bedavayemek-header>
+  <bedavayemek-header-auth *ngIf="authService.isLoggedIn()"
+    class="font-comfortaa relative z-20"></bedavayemek-header-auth>
+
   <router-outlet></router-outlet>
 </div>

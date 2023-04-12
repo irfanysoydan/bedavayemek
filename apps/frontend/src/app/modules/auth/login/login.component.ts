@@ -17,17 +17,20 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
-
+  isLoading = false;
   form = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   login() {
+    this.isLoading = true;
+
     if (this.form.invalid) {
       this._snackBar.open('Lütfen tüm alanları doldurun.', 'Tamam', {
         duration: 3000,
       });
+      this.isLoading = false;
       return;
     }
 
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
         this._snackBar.open(data.message, 'Tamam', {
           duration: 2000,
         });
-
+        this.isLoading = false;
         return;
       }
       this._snackBar.open(data.message, 'Tamam', {
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
       });
       localStorage.setItem('accessToken', data.data.accessToken);
       this.router.navigateByUrl('/');
+      this.isLoading = false;
     });
   }
 

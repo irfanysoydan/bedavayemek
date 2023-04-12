@@ -14,6 +14,7 @@ import { Auth } from '../auth/entities/auth.entity';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review } from './entities/review.entity';
 import { ReviewService } from './review.service';
+import { ApiResponse } from '../_core/response/api-response.dto';
 
 @Controller('review')
 @UseGuards(AuthGuard('jwt'))
@@ -25,7 +26,7 @@ export class ReviewController {
     @Body() createReviewDto: CreateReviewDto,
     @GetUser() auth: Auth,
     @Param('postId') postId: string
-  ): Promise<any> {
+  ): Promise<ApiResponse<Review>> {
     return await this.reviewService.createReview(createReviewDto, auth, postId);
   }
 
@@ -43,7 +44,9 @@ export class ReviewController {
   }
 
   @Get('post/:postId')
-  async getReviewsByPostId(@Param('postId') postId: string): Promise<Review[]> {
+  async getReviewsByPostId(
+    @Param('postId') postId: string
+  ): Promise<ApiResponse<Review[]>> {
     return await this.reviewService.getReviewsByPostId(postId);
   }
 
