@@ -5,14 +5,20 @@ import { HomeComponent } from './modules/home/home.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { MainComponent } from './modules/main/main.component';
 import { AuthGuard } from './core/auth/auth.guard';
-import { PostDialogComponent } from './modules/post-dialog/post-dialog.component';
+import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
+import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'main', component: MainComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'post/:id', component: PostDialogComponent },
+  { path: 'posts', component: GetPostsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'post/:id',
+    component: GetPostDetailsComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

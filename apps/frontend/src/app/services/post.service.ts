@@ -23,4 +23,15 @@ export class PostService {
   getPosts(): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(this.apiUrl + 'post', httpOptions);
   }
+
+  getOwnPosts(): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(this.apiUrl + 'post/own', httpOptions);
+  }
+
+  getPostById(id: string): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(
+      this.apiUrl + 'post/' + id,
+      httpOptions
+    );
+  }
 }

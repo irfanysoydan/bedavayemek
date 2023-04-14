@@ -35,13 +35,12 @@ export class PostController {
   }
 
   @Get('own')
-  async getOwnPosts(@GetUser() auth: Auth): Promise<Postie[]> {
-    //500 döner çünkü
+  async getOwnPosts(@GetUser() auth: Auth): Promise<ApiResponse<Postie[]>> {
     return await this.postService.getOwnPosts(auth);
   }
 
   @Get(':id')
-  async getPostById(@Param('id') id: string): Promise<Postie> {
+  async getPostById(@Param('id') id: string): Promise<ApiResponse<Postie>> {
     return await this.postService.getPostById(id);
   }
 

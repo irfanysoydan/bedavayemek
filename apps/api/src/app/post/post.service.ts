@@ -30,7 +30,10 @@ export class PostService {
 
   async getPosts(): Promise<ApiResponse<Post[]>> {
     try {
-      const posts = await this.postModel.find({ isActive: true }).populate("auth").exec();
+      const posts = await this.postModel
+        .find({ isActive: true })
+        .populate('auth')
+        .exec();
 
       return {
         data: posts,
@@ -43,20 +46,33 @@ export class PostService {
     }
   }
 
-  async getOwnPosts(auth: any): Promise<Post[]> {
+  async getOwnPosts(auth: any): Promise<ApiResponse<Post[]>> {
     try {
-      const posts = await this.postModel.find({ auth: auth._id }).exec();
-      return posts;
+      const posts = await this.postModel
+        .find({ auth: auth._id })
+        .populate('auth')
+        .exec();
+      return {
+        data: posts,
+        message: 'İşlem başarılı.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
   }
 
-  async getPostById(id: string): Promise<Post> {
+  async getPostById(id: string): Promise<ApiResponse<Post>> {
     try {
-      const post = await this.postModel.findById(id).exec();
+      const post = await this.postModel.findById(id).populate('auth').exec();
 
-      return post;
+      return {
+        data: post,
+        message: 'İşlem başarılı.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }

@@ -13,7 +13,6 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { HomeComponent } from './modules/home/home.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { MainComponent } from './modules/main/main.component';
-import { PostDialogComponent } from './modules/post-dialog/post-dialog.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,14 +25,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+
 import { HeaderComponent } from './layouts/header/header.component';
 import { SideabarComponent } from './layouts/sideabar/sideabar.component';
 import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
+import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
+import { CreatePostComponent } from './modules/post/create-post/create-post.component';
+import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +40,12 @@ import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component
     HomeComponent,
     RegisterComponent,
     MainComponent,
-    PostDialogComponent,
     HeaderComponent,
     SideabarComponent,
     HeaderAuthComponent,
+    GetPostsComponent,
+    CreatePostComponent,
+    GetPostDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,19 +61,11 @@ import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule,
     MatSidenavModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
-  providers: [
-    AuthService,
-    PostService,
-    ReviewService,
-    MatSnackBar,
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} },
-  ],
+  providers: [AuthService, PostService, ReviewService, MatSnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
