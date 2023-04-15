@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addComment(comment: string, postId: string) {
+  createReview(comment: string, postId: string) {
     const review: Review = {
       rating: 0,
       comment: comment,
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
     console.log(postId);
 
-    this.reviewService.addComment(review, postId).subscribe((data) => {
+    this.reviewService.createReview(review, postId).subscribe((data) => {
       if (!data.isSuccessful) {
         this._snackBar.open(data.message, 'Tamam', {
           duration: 2000,

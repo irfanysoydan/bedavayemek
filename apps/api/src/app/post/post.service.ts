@@ -10,7 +10,10 @@ import { ApiResponse } from '../_core/response/api-response.dto';
 export class PostService {
   constructor(@InjectModel(Post.name) private postModel: Model<PostDocument>) {}
 
-  async createPost(createPostDto: CreatePostDto, auth: Auth): Promise<Post> {
+  async createPost(
+    createPostDto: CreatePostDto,
+    auth: Auth
+  ): Promise<ApiResponse<Post>> {
     try {
       const { title, description, image, location, expireDate } = createPostDto;
       const post = await this.postModel.create({
@@ -22,7 +25,12 @@ export class PostService {
         auth,
       });
 
-      return post;
+      return {
+        data: post,
+        message: 'Post created',
+        statusCode: 201,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
@@ -37,7 +45,7 @@ export class PostService {
 
       return {
         data: posts,
-        message: 'İşlem başarılı.',
+        message: 'Posts fetched',
         statusCode: 200,
         isSuccessful: true,
       };
@@ -54,7 +62,7 @@ export class PostService {
         .exec();
       return {
         data: posts,
-        message: 'İşlem başarılı.',
+        message: 'Posts fetched',
         statusCode: 200,
         isSuccessful: true,
       };
@@ -69,7 +77,7 @@ export class PostService {
 
       return {
         data: post,
-        message: 'İşlem başarılı.',
+        message: 'Post fetched',
         statusCode: 200,
         isSuccessful: true,
       };

@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Auth } from '../../auth/entities/auth.entity';
-import { Review } from '../../review/entities/review.entity';
 
 export type PostDocument = Post & Document;
 
@@ -20,7 +19,7 @@ export class Post {
   location: string;
 
   @Prop({ nullable: true })
-  expireDate: Date;
+  expireDate: string;
 
   @Prop({ default: 0.0 })
   rating: number;

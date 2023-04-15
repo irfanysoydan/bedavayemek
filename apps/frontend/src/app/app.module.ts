@@ -25,7 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { MatSelectModule } from '@angular/material/select';
 import { HeaderComponent } from './layouts/header/header.component';
 import { SideabarComponent } from './layouts/sideabar/sideabar.component';
 import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
@@ -64,6 +64,7 @@ import { GetPostDetailsComponent } from './modules/post/get-post-details/get-pos
     MatSidenavModule,
     MatListModule,
     MatProgressBarModule,
+    MatSelectModule
   ],
   providers: [AuthService, PostService, ReviewService, MatSnackBar],
   bootstrap: [AppComponent],

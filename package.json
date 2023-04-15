@@ -81,6 +81,7 @@
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "mongoose": "^7.0.3",
+    "ngx-file-drop": "^15.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "rand-token": "^1.0.1",

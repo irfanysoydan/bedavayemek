@@ -65,7 +65,7 @@
           <textarea class="outline-none w-11/12 resize-none overflow-hidden" placeholder="Yorum ekle..." type="text"
             (input)="onInputChange($event,post.id)" #comment></textarea>
           <a class="text-sm text-secondary resize-y w-1/12 block text-right cursor-pointer self-center"
-            (click)="addComment(comment.value, post.id); comment.value=''; showShareLink[post.id] = false;"
+            (click)="createReview(comment.value, post.id); comment.value=''; showShareLink[post.id] = false;"
             *ngIf="showShareLink[post.id]">Paylaş</a>
         </div>
         <!-- Yorum  Bölümü -->

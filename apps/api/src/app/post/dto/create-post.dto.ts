@@ -13,6 +13,6 @@ export class CreatePostDto {
   @IsString()
   location: string;
 
-  @IsDateString()
-  expireDate: Date;
+  @IsString()
+  expireDate: string;
 }

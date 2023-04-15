@@ -25,7 +25,7 @@ export class PostController {
   async createPost(
     @Body() createPostDto: CreatePostDto,
     @GetUser() auth: Auth
-  ): Promise<any> {
+  ): Promise<ApiResponse<Postie>> {
     return await this.postService.createPost(createPostDto, auth);
   }
 

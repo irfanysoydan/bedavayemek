@@ -56,7 +56,7 @@
 
           <div class="flex justify-center mb-6 mt-6">
             <button mat-raised-button class="w-full" color="white">
-              <a href="#comments" class="font-semibold text-xs text-gray-500 w-full uppercase font-prosans">Yorumları
+              <a class="font-semibold text-xs text-gray-500 w-full uppercase font-prosans">Yorumları
                 Gör </a>
             </button>
           </div>
@@ -67,47 +67,89 @@
       </mat-card>
 
     </div>
+    <div class="flex flex-row space-x-5">
+      <div class="font-prosans my-6">
+        <p class="text-xl font-semibold" id=""> Paylaşımı Değerlendir</p>
+        <mat-card>
 
-    <div class="font-prosans my-6">
-      <p class="text-xl font-semibold"> Paylaşım Değerlendirmeleri ({{reviews.length}})</p>
-      <mat-card>
+          <mat-card-content class="text-xs  min-h-[500px] min-w-[400px]">
 
-        <mat-card-content class="text-xs">
+            <form [formGroup]="commentForm" class="flex flex-col items-center space-y-12">
 
-          <div>
-            <div class="flex flex-col justify-center" *ngFor="let review of reviews let i = index"  >
-              <ng-container *ngIf="i !== 0">
-              <hr class="mb-2">
-            </ng-container>
-              <div class="flex flex-row">
-                <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
-                  <mat-icon [ngStyle]="{
-                      'color': rating <= (review.rating ?? 0) ? '#FFD700' : '#808080',
-                      'font-size': '16px'
-                    }" title="{{review.rating}}/5">
-                    star
-                  </mat-icon>
-                </ng-container>
-                <p>{{review.comment}}</p>
+              <!-- Yıldız Puanı Seçimi -->
+              <div class="flex items-center justify-center">
+                <span id="star1" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+                  (click)="rate(1)"><mat-icon>star</mat-icon></span>
+                <span id="star2" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+                  (click)="rate(2)"><mat-icon>star</mat-icon></span>
+                <span id="star3" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+                  (click)="rate(3)"><mat-icon>star</mat-icon></span>
+                <span id="star4" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+                  (click)="rate(4)"><mat-icon>star</mat-icon></span>
+                <span id="star5" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+                  (click)="rate(5)"><mat-icon>star</mat-icon></span>
               </div>
+              <input type="hidden" id="rating">
 
-              <div class="flex flex-row text-gray-500">
-                <p>{{review.auth?.username}}</p>
-                <span class="mx-4">|</span>
-                <p>{{review.createdAt | date:'dd/MM/yyyy'}} {{review.createdAt | date:'HH.mm'}}</p>
+              <!-- Resim Seçimi -->
+              <div class="flex flex-col justify-center items-center">
+                <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[350px] h-[300px] object-contain mb-2">
+                <div class="flex justify-center items-center object-contain">
+                  <label for="image"
+                    class="py-2 px-4 bg-gray-500 hover:bg-blue-600 text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 cursor-pointer">
+                    Resim Seçin
+                  </label>
+                  <input type="file" class="hidden" id="image" (change)="onFileSelected($event)"
+                    formControlName="image">
+                </div>
+              </div>
+              <div class="flex flex-col w-full justify-center">
+                <!-- Açıklama Girişi -->
+                <mat-form-field appearance="fill" class="w-full">
+                  <mat-label>Yorum Girin</mat-label>
+                  <textarea style="resize: none; height: 150px;" matInput formControlName="comment"></textarea>
+                </mat-form-field>
+
+                <!-- Yorum Gönder Butonu -->
+
+                <button mat-raised-button color="primary" class="self-center" (click)="createReview()">Yorum
+                  Gönder</button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div id="reviews" class="font-prosans my-6">
+        <p class="text-xl font-semibold" id=""> Paylaşım Değerlendirmeleri ({{reviews.length}})</p>
+        <mat-card>
+          <mat-card-content class="text-xs ">
+            <div>
+              <div class="flex flex-col justify-center" *ngFor="let review of reviews let i = index">
+                <ng-container *ngIf="i !== 0">
+                  <hr class="mb-2">
+                </ng-container>
+                <div class="flex flex-row">
+                  <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+                    <mat-icon [ngStyle]="{
+                      'color': rating <= (review.rating ?? 0) ? '#FFD700' : '#808080',
+                      'font-size': '20px'
+                    }" title="{{review.rating}}/5">
+                      star
+                    </mat-icon>
+                  </ng-container>
+                  <p>{{review.comment}}</p>
+                </div>
+                <div class="flex flex-row text-gray-500">
+                  <p>{{review.auth?.username}}</p>
+                  <span class="mx-4">|</span>
+                  <p>{{review.createdAt | date:'dd/MM/yyyy'}} {{review.createdAt | date:'HH.mm'}}</p>
+                </div>
               </div>
             </div>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
-
-
-
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
-
-
-
   </div>
 
 </div>

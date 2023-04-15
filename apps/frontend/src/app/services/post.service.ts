@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
+import { Post } from '../models/post.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,6 +32,14 @@ export class PostService {
   getPostById(id: string): Observable<ResponseModel> {
     return this.http.get<ResponseModel>(
       this.apiUrl + 'post/' + id,
+      httpOptions
+    );
+  }
+
+  createPost(post: Post): Observable<ResponseModel> {
+    return this.http.post<ResponseModel>(
+      this.apiUrl + 'post',
+      post,
       httpOptions
     );
   }

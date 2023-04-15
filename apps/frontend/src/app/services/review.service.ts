@@ -21,7 +21,7 @@ export class ReviewService {
 
   apiUrl = 'http://localhost:3333/api/';
 
-  addComment(review: Review, postId: string): Observable<ResponseModel> {
+  createReview(review: Review, postId: string): Observable<ResponseModel> {
     return this.http.post<ResponseModel>(
       this.apiUrl + 'review/post/' + postId,
       review,
