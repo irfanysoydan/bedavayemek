@@ -54,30 +54,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  createReview(comment: string, postId: string) {
-    const review: Review = {
-      rating: 0,
-      comment: comment,
-      image: '',
-    };
-
-    console.log(postId);
-
-    this.reviewService.createReview(review, postId).subscribe((data) => {
-      if (!data.isSuccessful) {
-        this._snackBar.open(data.message, 'Tamam', {
-          duration: 2000,
-        });
-        return;
-      }
-      this._snackBar.open('Yorumunuz başarıyla eklendi', 'Tamam', {
-        duration: 2000,
-      });
-    });
-
-    this.showShareLink[postId] = false;
-  }
-
   showFullDescriptionClicked(postId: string): void {
     this.showFullDescription.set(postId, true);
     this.cdr.detectChanges();
@@ -86,9 +62,5 @@ export class HomeComponent implements OnInit {
     if (button) {
       button.remove();
     }
-  }
-
-  onInputChange(event: any, postId: string) {
-    this.showShareLink[postId] = event.target.value !== '';
   }
 }

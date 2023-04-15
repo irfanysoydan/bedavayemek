@@ -32,6 +32,7 @@ import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component
 import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
 import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
+import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GetPostDetailsComponent } from './modules/post/get-post-details/get-pos
     GetPostsComponent,
     CreatePostComponent,
     GetPostDetailsComponent,
+    GetReviewDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,7 @@ import { GetPostDetailsComponent } from './modules/post/get-post-details/get-pos
     MatSidenavModule,
     MatListModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [AuthService, PostService, ReviewService, MatSnackBar],
   bootstrap: [AppComponent],

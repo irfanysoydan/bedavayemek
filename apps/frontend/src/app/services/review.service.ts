@@ -35,4 +35,11 @@ export class ReviewService {
       httpOptions
     );
   }
+
+  getReviewById(reviewId: string): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(
+      this.apiUrl + 'review/' + reviewId,
+      httpOptions
+    );
+  }
 }

@@ -39,7 +39,7 @@ export class ReviewController {
   async getReviewById(
     @Param('id') id: string,
     @GetUser() auth: Auth
-  ): Promise<Review> {
+  ): Promise<ApiResponse<Review>> {
     return await this.reviewService.getReviewById(id, auth);
   }
 

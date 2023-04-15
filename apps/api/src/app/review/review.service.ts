@@ -59,13 +59,20 @@ export class ReviewService {
     }
   }
 
-  async getReviewById(id: string, auth: any): Promise<Review> {
+  async getReviewById(id: string, auth: any): Promise<ApiResponse<Review>> {
     try {
       const review = await this.reviewModel
         .findOne({ _id: id, auth: auth._id }, {})
+        .populate('auth')
+        .populate('post')
         .exec();
 
-      return review;
+      return {
+        data: review,
+        message: 'Yorum başarıyla getirildi.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }

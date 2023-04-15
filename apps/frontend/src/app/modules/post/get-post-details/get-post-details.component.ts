@@ -72,7 +72,7 @@ export class GetPostDetailsComponent implements OnInit {
     const review: Review = {
       id: '',
       rating: this.ratingInput,
-      image: this.commentForm.value.image,
+      image:  this.dataURI,
       comment: this.commentForm.value.comment,
     };
 

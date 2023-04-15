@@ -60,14 +60,6 @@
 
         <!-- Yorum  Bölümü -->
         <button class="text-gray-400" [routerLink]="['/post',post.id]">Yorumların tümünü görüntüle</button>
-
-        <div class="flex flex-row w-full mt-3">
-          <textarea class="outline-none w-11/12 resize-none overflow-hidden" placeholder="Yorum ekle..." type="text"
-            (input)="onInputChange($event,post.id)" #comment></textarea>
-          <a class="text-sm text-secondary resize-y w-1/12 block text-right cursor-pointer self-center"
-            (click)="createReview(comment.value, post.id); comment.value=''; showShareLink[post.id] = false;"
-            *ngIf="showShareLink[post.id]">Paylaş</a>
-        </div>
         <!-- Yorum  Bölümü -->
 
       </mat-card-content>

@@ -8,6 +8,7 @@ import { AuthGuard } from './core/auth/auth.guard';
 import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
 import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
+import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'create-post',
     component: CreatePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'review/:id',
+    component: GetReviewDetailsComponent,
     canActivate: [AuthGuard],
   },
 ];
