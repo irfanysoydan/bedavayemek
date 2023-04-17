@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bedavayemek-create-post',
@@ -14,7 +15,8 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -61,6 +63,8 @@ export class CreatePostComponent implements OnInit {
         duration: 2000,
       });
       this.isLoading = false;
+
+      this.router.navigate(['/posts']);
     });
   }
 

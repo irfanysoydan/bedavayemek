@@ -83,6 +83,7 @@ export class ReviewService {
       const reviews = await this.reviewModel
         .find({ post: postId })
         .populate('auth')
+        .sort({ createdAt: -1 })
         .exec();
 
       if (!reviews) throw new NotFoundException('Reviews not found!');

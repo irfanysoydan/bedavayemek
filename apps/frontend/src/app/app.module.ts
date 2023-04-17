@@ -36,6 +36,7 @@ import { CreatePostComponent } from './modules/post/create-post/create-post.comp
 import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
 import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
+import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { EditPostComponent } from './modules/post/edit-post/edit-post.component'
     GetPostDetailsComponent,
     GetReviewDetailsComponent,
     EditPostComponent,
+    GetReviewsComponent,
   ],
   imports: [
     BrowserModule,

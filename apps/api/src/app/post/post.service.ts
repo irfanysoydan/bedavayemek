@@ -43,6 +43,7 @@ export class PostService {
       const posts = await this.postModel
         .find({ isActive: true })
         .populate('auth')
+        .sort({ createdAt: -1 })
         .exec();
 
       return {
@@ -61,6 +62,7 @@ export class PostService {
       const posts = await this.postModel
         .find({ auth: auth._id })
         .populate('auth')
+        .sort({ createdAt: -1 })
         .exec();
       return {
         data: posts,
