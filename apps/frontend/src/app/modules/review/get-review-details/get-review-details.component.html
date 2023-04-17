@@ -1,6 +1,6 @@
 <bedavayemek-sideabar class="lg:visible invisible top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
-<div class="lg:ml-72 px-4 py-8 font-roboto flex flex-row justify-center font-prosans">
+<div *ngIf="isLoaded" class="lg:ml-72 px-4 py-8 font-roboto flex flex-row justify-center font-prosans">
 
   <div class="flex flex-col">
 
@@ -33,7 +33,7 @@
 
                 <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
                   <mat-icon [ngStyle]="{
-                      'color': rating <= (review.post?.rating ?? 0) ? '#FFD700' : '#808080',
+                      'color': rating <= (review.post!.rating) ? '#FFD700' : '#808080',
                       'font-size': '20px'
                     }" title="{{review.post?.rating}}/5">
                     star
@@ -68,7 +68,7 @@
               <div class="flex items-center justify-end">
                 <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
                   <mat-icon [ngStyle]="{
-                    'color': rating <= (review.rating ?? 0) ? '#FFD700' : '#808080',
+                    'color': rating <= (review.rating) ? '#FFD700' : '#808080',
                     'font-size': '20px'
                   }" title="{{review.rating}}/5">
                     star

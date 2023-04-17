@@ -22,6 +22,7 @@ export class GetReviewDetailsComponent implements OnInit {
     this.getReviewById(this.reviewId);
   }
 
+  isLoaded = false;
   reviewId = '';
   isLoading = false;
   post!: Post;
@@ -37,6 +38,7 @@ export class GetReviewDetailsComponent implements OnInit {
       }
       this.review = data.data;
       this.isLoading = false;
+      this.isLoaded = true;
     });
   }
 }

@@ -1,0 +1,66 @@
+<bedavayemek-sideabar class="lg:visible invisible top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+<div *ngIf="isLoaded" class="lg:ml-72 px-4 py-8 font-roboto flex justify-center font-prosans">
+  <div class="flex flex-row border rounded p-4">
+    <form [formGroup]="form" class="flex flex-row">
+
+      <div class="flex flex-col justify-center items-center">
+        <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[300px] h-[200px] object-contain">
+        <div class="flex justify-center items-center w-[300px] h-[200px] object-contain">
+          <label for="image"
+            class="py-2 px-4 bg-gray-500 hover:bg-blue-600 text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 cursor-pointer">
+            Resim Seçin
+          </label>
+          <input type="file" class="hidden" id="image" (change)="onFileSelected($event)" formControlName="image">
+        </div>
+      </div>
+
+      <mat-card class="h-[600px] w-[600px] flex justify-center" style="border:none; box-shadow:none;">
+        <p class="text-xl font-semibold flex self-center"> Paylaşımı Düzenle </p>
+        <mat-card-content class="text-xs">
+
+          <div class="flex flex-col">
+            <label>Başlık</label>
+            <mat-form-field class="text-lg" appearance="outline">
+              <input class="resize-none" matInput placeholder="Başlık giriniz" formControlName="title">
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col">
+            <label>Açıklama</label>
+            <mat-form-field class="text-lg" appearance="outline">
+              <textarea style="resize: none; height: 150px;" matInput placeholder="Açıklama giriniz"
+                formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col">
+            <label>Konum</label>
+            <mat-form-field class="text-lg" appearance="outline">
+              <input matInput placeholder="Konum giriniz" formControlName="location">
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col">
+            <label>Sona Erme Tarihi</label>
+            <mat-form-field class="text-lg" appearance="outline">
+              <input type="datetime-local" matInput placeholder="Tarih giriniz" formControlName="expireDate">
+
+            </mat-form-field>
+          </div>
+
+          <div class="flex justify-center">
+            <button mat-raised-button color="accent" type="button" (click)="editPost()">
+              <a class="text-sm text-black uppercase">Güncelle
+              </a>
+            </button>
+          </div>
+
+
+        </mat-card-content>
+
+      </mat-card>
+    </form>
+
+  </div>
+</div>

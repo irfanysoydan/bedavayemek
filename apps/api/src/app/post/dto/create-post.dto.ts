@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsDateString } from 'class-validator';
+import { IsString, IsDate, IsDateString, IsNumber } from 'class-validator';
 
 export class CreatePostDto {
   @IsString()
@@ -9,6 +9,9 @@ export class CreatePostDto {
 
   @IsString()
   image: string;
+
+  @IsNumber()
+  rating: number;
 
   @IsString()
   location: string;

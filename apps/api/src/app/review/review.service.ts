@@ -130,7 +130,7 @@ export class ReviewService {
         )
         .exec();
 
-      return 'Review deleted successfully';
+      return 'Yorum başarıyla silindi.';
     } catch (error) {
       throw new InternalServerErrorException();
     }

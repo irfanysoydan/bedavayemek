@@ -3,7 +3,7 @@ import { Post } from './post.model';
 
 export class Review {
   id?: string;
-  rating?: number | null;
+  rating!: number;
   comment?: string | null;
   image?: string | null;
   isActive?: boolean;

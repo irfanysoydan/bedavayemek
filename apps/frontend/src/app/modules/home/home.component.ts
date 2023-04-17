@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     console.log(this.isLoading);
     this.postService.getPosts().subscribe((data) => {
-      console.log(data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;
@@ -47,9 +46,6 @@ export class HomeComponent implements OnInit {
       if (!data.isSuccessful) {
         return;
       }
-
-      console.log(postId);
-      console.log(data);
       this.reviews = data.data;
     });
   }

@@ -26,6 +26,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { HeaderComponent } from './layouts/header/header.component';
 import { SideabarComponent } from './layouts/sideabar/sideabar.component';
 import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
@@ -33,6 +35,7 @@ import { GetPostsComponent } from './modules/post/get-posts/get-posts.component'
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
 import { GetPostDetailsComponent } from './modules/post/get-post-details/get-post-details.component';
 import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
+import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
     CreatePostComponent,
     GetPostDetailsComponent,
     GetReviewDetailsComponent,
+    EditPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
     MatListModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatMenuModule,
   ],
   providers: [AuthService, PostService, ReviewService, MatSnackBar],
   bootstrap: [AppComponent],

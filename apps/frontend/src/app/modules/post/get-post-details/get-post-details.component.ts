@@ -31,7 +31,7 @@ export class GetPostDetailsComponent implements OnInit {
     image: [''],
     comment: ['', Validators.required],
   });
-
+  isLoaded = false;
   postId = '';
   post!: Post;
   reviews: Review[] = [];
@@ -47,21 +47,25 @@ export class GetPostDetailsComponent implements OnInit {
       }
       this.post = data.data;
       this.getReviewsByPostId(postId);
-      this.isLoading = false;
     });
   }
 
   getReviewsByPostId(postId: string) {
     this.reviewService.getReviewsByPostId(postId).subscribe((data) => {
       if (!data.isSuccessful) {
+        this._snackBar.open(data.message, 'Tamam', {
+          duration: 2000,
+        });
         return;
       }
       this.reviews = data.data;
+      this.isLoaded = true;
+      this.isLoading = false;
     });
   }
 
   createReview() {
-    console.log(this.commentForm);
+    this.isLoaded = false;
     if (this.commentForm.invalid) {
       this._snackBar.open('Lütfen tüm alanları doldurunuz', 'Tamam', {
         duration: 2000,
@@ -72,7 +76,7 @@ export class GetPostDetailsComponent implements OnInit {
     const review: Review = {
       id: '',
       rating: this.ratingInput,
-      image:  this.dataURI,
+      image: this.dataURI,
       comment: this.commentForm.value.comment,
     };
 
@@ -93,10 +97,25 @@ export class GetPostDetailsComponent implements OnInit {
         return;
       }
       this.isLoading = false;
+
+      this.post.rating =
+        (this.post.rating * this.reviews.length + review.rating) /
+        (this.reviews.length + 1);
+
+      this.postService
+        .updatePostById(this.post.id, this.post)
+        .subscribe((data) => {
+          if (!data.isSuccessful) {
+            return;
+          }
+          this.post = data.data;
+          console.log(this.post);
+        });
+
       this._snackBar.open('Yorumunuz başarıyla eklendi', 'Tamam', {
         duration: 2000,
       });
-      this.getReviewsByPostId(this.post.id);
+      this.getPostById(this.postId);
       this.commentForm.reset();
       this.rate(0);
       this.dataURI = '';

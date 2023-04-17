@@ -5,6 +5,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -44,8 +45,8 @@ export class PostController {
     return await this.postService.getPostById(id);
   }
 
-  @Delete(':id')
-  async deletePostById(@Param('id') id: string): Promise<string> {
+  @Patch(':id')
+  async deletePostById(@Param('id') id: string): Promise<ApiResponse<string>> {
     return await this.postService.deletePostById(id);
   }
 
@@ -53,7 +54,7 @@ export class PostController {
   async updatePostById(
     @Param('id') id: string,
     @Body() createPostDto: CreatePostDto
-  ): Promise<string> {
+  ): Promise<ApiResponse<string>> {
     return await this.postService.updatePostById(id, createPostDto);
   }
 }

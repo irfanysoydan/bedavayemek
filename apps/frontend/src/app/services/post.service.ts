@@ -43,4 +43,20 @@ export class PostService {
       httpOptions
     );
   }
+
+  updatePostById(id: string, post: Post): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      this.apiUrl + 'post/' + id,
+      post,
+      httpOptions
+    );
+  }
+
+  deletePost(id: string): Observable<ResponseModel> {
+    console.log(httpOptions);
+    return this.http.patch<ResponseModel>(
+      this.apiUrl + 'post/' + id,
+      httpOptions
+    );
+  }
 }

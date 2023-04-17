@@ -15,10 +15,12 @@ export class PostService {
     auth: Auth
   ): Promise<ApiResponse<Post>> {
     try {
-      const { title, description, image, location, expireDate } = createPostDto;
+      const { title, description, rating, image, location, expireDate } =
+        createPostDto;
       const post = await this.postModel.create({
         title,
         description,
+        rating,
         image,
         location,
         expireDate: new Date(expireDate),
@@ -27,7 +29,7 @@ export class PostService {
 
       return {
         data: post,
-        message: 'Post created',
+        message: 'Paylaşım oluşturma başarılı',
         statusCode: 201,
         isSuccessful: true,
       };
@@ -86,11 +88,17 @@ export class PostService {
     }
   }
 
-  async deletePostById(id: string): Promise<string> {
+  async deletePostById(id: string): Promise<ApiResponse<string>> {
     try {
-      const post = await this.postModel.findByIdAndDelete(id).exec();
-
-      return `${post.title} is deleted`;
+      const post = await this.postModel
+        .findByIdAndUpdate(id, { isActive: false }, { new: true })
+        .exec();
+      return {
+        data: `${post.title} is deleted`,
+        message: 'Paylaşımı silme işlemi başarılı',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
@@ -99,15 +107,17 @@ export class PostService {
   async updatePostById(
     id: string,
     createPostDto: CreatePostDto
-  ): Promise<string> {
+  ): Promise<ApiResponse<string>> {
     try {
-      const { title, description, image, location, expireDate } = createPostDto;
+      const { title, description, rating, image, location, expireDate } =
+        createPostDto;
       const post = await this.postModel
         .findByIdAndUpdate(
           id,
           {
             title,
             description,
+            rating,
             image,
             location,
             expireDate: new Date(expireDate),
@@ -115,8 +125,13 @@ export class PostService {
           { new: true }
         )
         .exec();
-
-      return `${post.title} is updated`;
+      console.log(post);
+      return {
+        data: `${post.title} is updated`,
+        message: 'Paylaşım güncelleme işlemi başarılı',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
