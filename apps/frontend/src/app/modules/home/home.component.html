@@ -1,9 +1,8 @@
-<bedavayemek-sideabar class="lg:visible invisible top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
+<bedavayemek-sideabar class=" top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
-<div class="lg:ml-72 px-4 py-8 font-roboto flex flex-row justify-center">
+<div class="md:ml-20 lg:ml-72 px-4 py-8 font-roboto flex flex-row justify-center">
   <div class="flex flex-col xl:flex-row xl:flex-wrap justify-center">
-    <mat-card class="m-3 lg:w-[600px] xl:w-[500px] 2xl:w-[575px]" style="border: none; box-shadow: none;"
-      *ngFor="let post of posts">
+    <mat-card class="m-3 w-full sm:w-[575px]" style="border: none; box-shadow: none;" *ngFor="let post of posts">
       <!-- Her bir card postun üst başlığı -->
       <mat-card-header class="bg-white px-0 flex items-center">
         <div class="flex flex-row flex-1 items-center">
@@ -49,7 +48,8 @@
         <!-- Yol Tarifi Butonu -->
 
         <!-- Açıklama Bölümü -->
-        <p (click)="showFullDescriptionClicked(post.id)">{{ showFullDescription.get(post.id) ? post.description :
+        <p *ngIf="post.description!.length <= 100">{{post.description}}</p>
+        <p *ngIf="post.description!.length > 100" (click)="showFullDescriptionClicked(post.id)">{{ showFullDescription.get(post.id) ? post.description :
           post.description?.substring(0, 100) + '...' }}
           <a class="text-sm text-secondary cursor-pointer" id="button-{{post.id}}"
             (click)="showFullDescriptionClicked(post.id)">Devamını Oku

@@ -58,6 +58,7 @@ export class GetPostDetailsComponent implements OnInit {
         });
         return;
       }
+
       this.reviews = data.data;
       this.isLoaded = true;
       this.isLoading = false;
@@ -79,8 +80,6 @@ export class GetPostDetailsComponent implements OnInit {
       image: this.dataURI,
       comment: this.commentForm.value.comment,
     };
-
-    console.log(review);
     this.reviewService.createReview(review, this.post.id).subscribe((data) => {
       if (!data.isSuccessful) {
         this._snackBar.open(data.message, 'Tamam', {

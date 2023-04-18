@@ -11,6 +11,5 @@ export class GetReviewsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getReviews() {
-
+  getReviews() {}
 }

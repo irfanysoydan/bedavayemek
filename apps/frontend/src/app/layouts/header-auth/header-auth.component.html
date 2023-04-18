@@ -1,12 +1,25 @@
-<header class="bg-primary text-white shadow h-20 flex items-center justify-center">
-  <nav class="mx-8 px-4 py-2 flex justify-between items-center lg:flex-1">
-    <a routerLink="/" class="text-xl font-bold">BedavaYemek.com</a>
+<header class="bg-primary text-white w-full shadow h-15 lg:h-20 flex  items-center justify-center ">
+  <nav class="lg:mx-8 px-4 py-2 w-full flex flex-row justify-between items-center">
+    <a routerLink="/" class="text-xl font-bold hidden lg:block">BedavaYemek.com</a>
 
-    <ul class="flex text-base invisible lg:visible">
-      <li class="ml-6 flex items-center">
+    <div class="flex flex-row items-center w-full justify-between lg:hidden">
+
+      <a routerLink="/" class="text-xl font-bold ">BedavaYemek.com</a>
+      <a href="">
+        <button class="text-base">
+          <span>
+            <i class="material-icons text-3xl">menu</i>
+          </span>
+        </button>
+      </a>
+
+    </div>
+
+    <ul class="items-center text-base hidden lg:flex">
+      <li class="ml-6">
         <a href="">
           <button
-            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out hover:translate-x-1">
             <span class="mr-1 flex items-center">
               <i class="material-icons text-lg">home</i>
             </span>
@@ -17,7 +30,7 @@
       <li class="ml-6">
         <a href="">
           <button
-            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out hover:translate-x-1">
             <span class="mr-1 flex items-center">
               <i class="material-icons text-lg">article</i>
             </span>
@@ -28,7 +41,7 @@
       <li class="ml-6">
         <a href="">
           <button
-            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1">
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out hover:translate-x-1">
             <span class="mr-1 flex items-center">
               <i class="material-icons text-lg">phone</i>
             </span>
@@ -39,7 +52,8 @@
       <li class="ml-6">
         <a href="">
           <button
-            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out bg-neutral-50/[0.0] hover:bg-neutral-50/[0.2] hover:translate-x-1" (click)="logout()">
+            class="flex flex-row items-center text-base h-full transition duration-300 ease-in-out hover:translate-x-1"
+            (click)="logout()">
             <span class="mr-1 flex items-center">
               <i class="material-icons text-lg">logout</i>
             </span>
@@ -48,5 +62,8 @@
         </a>
       </li>
     </ul>
+
+
+
   </nav>
 </header>

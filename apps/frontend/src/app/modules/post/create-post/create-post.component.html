@@ -1,21 +1,22 @@
-<bedavayemek-sideabar class="lg:visible invisible top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
+<bedavayemek-sideabar class="top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sideabar>
+
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
-<div class="lg:ml-72 px-4 py-8 font-roboto flex justify-center font-prosans">
-  <div class="flex flex-row border rounded p-4">
-    <form [formGroup]="form" class="flex flex-row">
+<div class="md:ml-20 lg:ml-72 px-4 py-8 font-roboto flex justify-center">
+  <div class="flex flex-row border rounded p-4 w-full xl:w-[950px]">
+    <form [formGroup]="form" class="flex flex-col md:flex-row w-full xl:w-[950px]">
 
       <div class="flex flex-col justify-center items-center">
         <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[300px] h-[200px] object-contain">
-        <div class="flex justify-center items-center w-[300px] h-[200px] object-contain">
+        <div class="flex justify-center items-center w-[300px] h-[100px] object-contain">
           <label for="image"
-            class="py-2 px-4 bg-gray-500 hover:bg-blue-600 text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 cursor-pointer">
+            class="py-2 px-4 bg-gray-500 text-white rounded-lg cursor-pointer">
             Resim Seçin
           </label>
           <input type="file" class="hidden" id="image" (change)="onFileSelected($event)" formControlName="image">
         </div>
       </div>
 
-      <mat-card class="h-[600px] w-[600px] flex justify-center" style="border:none; box-shadow:none;">
+      <mat-card class="h-[600px] w-full xl:w-[600px] flex justify-center" style="border:none; box-shadow:none;">
         <p class="text-xl font-semibold flex self-center"> Paylaşım Yap </p>
         <mat-card-content class="text-xs">
 
@@ -51,7 +52,7 @@
 
           <div class="flex justify-center">
             <button mat-raised-button color="accent" type="button" (click)="createPost()">
-              <a class="text-sm text-black uppercase">Kaydol
+              <a class="text-sm text-black uppercase">Paylaş
               </a>
             </button>
           </div>
