@@ -1,0 +1,73 @@
+******************************************************************************
+KULLANICI
+----------
++register 
++login 
+******************************************************************************
+
+******************************************************************************
+POSTLAR
+--------
++create 
++getOwnPosts (kullanıcı kendi postlarının jepsini görecek)
++getAllPosts (tüm kullanıcıların aktif postları)
++getPostById (id'ye göre aktif post)
++deletePostById (id'ye göre durumu passive olacak post)
++updatePostById (id'ye göre özellikleri değişecek olan post)
+******************************************************************************
+
+******************************************************************************
+REVİEWLAR
+----------
++create
++getAllOwnReviews (kullanıcı kendi yaptığı reviewların tamamını görebilecek) 
++getReviewById (id'ye göre review'ün tüm detaylarını görülebilecek)
++getAllReviewByPostId (Postun tüm reviewları gelecek)
++updateReviewById (review güncellenebilecek)
++deleteReviewById (review silinebilecek.)
+******************************************************************************
+
+
+	->EKRANLAR<-
+
+AUTH
+----
+login ( + )
+register ( + )
+----
+
+POST
+----
+my posts ( + )
+post detail ( + )
+create post ( + )
+edit post ( + )
+----
+
+REVIEW
+-----
+review details ( + )
+my reviews (  )
+edit review ( )
+
+
+
+mainpage (  )
+home ( + )
+profile (  )
+settings (  )
+about (  )
+contact (  )
+
+
+
+
+
+
+
+
+
+
+
+
+
