@@ -37,6 +37,7 @@ export class GetPostDetailsComponent implements OnInit {
   reviews: Review[] = [];
   isLoading = false;
   ratingInput = 0;
+  dataURI = '';
 
   getPostById(postId: string) {
     this.isLoading = true;
@@ -121,7 +122,6 @@ export class GetPostDetailsComponent implements OnInit {
     });
   }
 
-  dataURI = '';
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];

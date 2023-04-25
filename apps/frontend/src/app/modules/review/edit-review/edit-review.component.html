@@ -1,0 +1,58 @@
+<bedavayemek-sidebar class="top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sidebar>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+<div *ngIf="isLoaded" class="lg:ml-72 px-4 py-8 font-roboto flex justify-center font-prosans">
+  <div class="flex flex-row border rounded p-4">
+
+    <form [formGroup]="commentForm" class="flex flex-row">
+      <!-- Resim Seçimi -->
+      <div class="flex flex-col justify-center items-center">
+        <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[300px] h-[200px] object-contain">
+        <div class="flex justify-center items-center w-[300px] h-[200px] object-contain">
+          <label for="image"
+            class="py-2 px-4 bg-gray-500 hover:bg-blue-600 text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 cursor-pointer">
+            Resim Seçin
+          </label>
+          <input type="file" class="hidden" id="image" (change)="onFileSelected($event)" formControlName="image">
+        </div>
+      </div>
+      <!-- Resim Seçimi -->
+
+      <mat-card class="h-[400px] w-[600px] flex justify-center" style="border:none; box-shadow:none;">
+        <p class="text-xl font-semibold flex self-center"> Yorumu Düzenle </p>
+        <mat-card-content class="text-xs">
+
+          <!-- Yıldız Puanı Seçimi -->
+          <div class="flex items-center justify-center">
+            <span id="star1" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+              (click)="rate(1)"><mat-icon>star</mat-icon></span>
+            <span id="star2" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+              (click)="rate(2)"><mat-icon>star</mat-icon></span>
+            <span id="star3" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+              (click)="rate(3)"><mat-icon>star</mat-icon></span>
+            <span id="star4" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+              (click)="rate(4)"><mat-icon>star</mat-icon></span>
+            <span id="star5" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
+              (click)="rate(5)"><mat-icon>star</mat-icon></span>
+          </div>
+          <input type="hidden" id="rating">
+
+
+
+          <div class="flex flex-col w-full justify-center">
+            <!-- Açıklama Girişi -->
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Yorum Girin</mat-label>
+              <textarea style="resize: none; height: 150px;" matInput formControlName="comment"></textarea>
+            </mat-form-field>
+
+            <!-- Yorum Gönder Butonu -->
+
+            <button mat-raised-button color="primary" class="self-center" (click)="updateReview()">Yorumu
+              Güncelle</button>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </form>
+  </div>
+</div>

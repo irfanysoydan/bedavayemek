@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'bedavayemek-sideabar',
-  templateUrl: './sideabar.component.html',
-  styleUrls: ['./sideabar.component.scss'],
+  selector: 'bedavayemek-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SideabarComponent implements OnInit {
   constructor(private router: Router) {}

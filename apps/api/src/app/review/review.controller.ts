@@ -31,7 +31,7 @@ export class ReviewController {
   }
 
   @Get()
-  async getAllReviews(@GetUser() auth: Auth): Promise<Review[]> {
+  async getAllReviews(@GetUser() auth: Auth): Promise<ApiResponse<Review[]>> {
     return await this.reviewService.getOwnReviews(auth);
   }
 
@@ -55,7 +55,7 @@ export class ReviewController {
     @Param('id') id: string,
     @Body() updateReviewDto: CreateReviewDto,
     @GetUser() auth: Auth
-  ): Promise<Review> {
+  ): Promise<ApiResponse<Review>> {
     return await this.reviewService.updateReviewById(id, updateReviewDto, auth);
   }
 

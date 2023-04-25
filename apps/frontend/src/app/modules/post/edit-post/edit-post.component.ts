@@ -6,8 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostService } from '../../../services/post.service';
 import { Post } from '../../../models/post.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ResponseModel } from '../../../models/response.model';
 
 @Component({
   selector: 'bedavayemek-edit-post',

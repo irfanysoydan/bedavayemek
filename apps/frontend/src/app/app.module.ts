@@ -29,7 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from './layouts/header/header.component';
-import { SideabarComponent } from './layouts/sideabar/sideabar.component';
+import { SideabarComponent } from './layouts/sidebar/sidebar.component';
 import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
 import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
@@ -37,6 +37,7 @@ import { GetPostDetailsComponent } from './modules/post/get-post-details/get-pos
 import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
+import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.co
     GetReviewDetailsComponent,
     EditPostComponent,
     GetReviewsComponent,
+    EditReviewComponent,
   ],
   imports: [
     BrowserModule,

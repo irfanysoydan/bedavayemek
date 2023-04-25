@@ -42,4 +42,16 @@ export class ReviewService {
       httpOptions
     );
   }
+
+  getReviews(): Observable<ResponseModel> {
+    return this.http.get<ResponseModel>(this.apiUrl + 'review', httpOptions);
+  }
+
+  updateReviewById(id:string, review: Review): Observable<ResponseModel> {
+    return this.http.put<ResponseModel>(
+      this.apiUrl + 'review/' + id,
+      review,
+      httpOptions
+    );
+  }
 }

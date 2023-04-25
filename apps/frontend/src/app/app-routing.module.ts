@@ -10,6 +10,8 @@ import { GetPostDetailsComponent } from './modules/post/get-post-details/get-pos
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
 import { GetReviewDetailsComponent } from './modules/review/get-review-details/get-review-details.component';
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
+import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
+import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -35,6 +37,16 @@ const routes: Routes = [
   {
     path: 'review/:id',
     component: GetReviewDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'reviews',
+    component: GetReviewsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-review/:id',
+    component: EditReviewComponent,
     canActivate: [AuthGuard],
   },
 ];

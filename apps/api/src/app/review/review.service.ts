@@ -47,13 +47,23 @@ export class ReviewService {
     }
   }
 
-  async getOwnReviews(auth: any): Promise<Review[]> {
+  async getOwnReviews(auth: any): Promise<ApiResponse<Review[]>> {
     try {
-      const reviews = await this.reviewModel.find({ auth: auth._id }).exec();
+      const reviews = await this.reviewModel
+        .find({ auth: auth._id })
+        .populate('post')
+        .populate('auth')
+        .sort({ createdAt: -1 })
+        .exec();
 
       if (!reviews) throw new NotFoundException('Reviews not found!');
 
-      return reviews;
+      return {
+        data: reviews,
+        message: 'Yorumlar başarıyla getirildi.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
@@ -103,7 +113,7 @@ export class ReviewService {
     id: string,
     updateReviewDto: CreateReviewDto,
     auth: any
-  ): Promise<Review> {
+  ): Promise<ApiResponse<Review>> {
     try {
       const { rating, comment, image } = updateReviewDto;
       const review = await this.reviewModel
@@ -116,7 +126,12 @@ export class ReviewService {
 
       if (!review) throw new NotFoundException('Review not found!');
 
-      return review;
+      return {
+        data: review,
+        message: 'Yorum başarıyla güncellendi.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
     } catch (error) {
       throw new InternalServerErrorException();
     }
