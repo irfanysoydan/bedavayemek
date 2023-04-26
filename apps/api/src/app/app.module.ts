@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { ReviewModule } from './review/review.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -22,6 +23,11 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     AuthModule,
     PostModule,
     ReviewModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      include: [PostModule],
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+    }),
   ],
   controllers: [],
   providers: [],

@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Auth, AuthDocument } from '../auth/entities/auth.entity';
+import { Auth } from '../auth/entities/auth.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post, PostDocument } from './entities/post.entity';
 import { ApiResponse } from '../_core/response/api-response.dto';
@@ -17,7 +17,7 @@ export class PostService {
     try {
       const { title, description, rating, image, location, expireDate } =
         createPostDto;
-      const post = await this.postModel.create({
+      let post = await this.postModel.create({
         title,
         description,
         rating,
@@ -26,7 +26,7 @@ export class PostService {
         expireDate: new Date(expireDate),
         auth,
       });
-
+      post = await post.populate('auth');
       return {
         data: post,
         message: 'Paylaşım oluşturma başarılı',
@@ -57,10 +57,10 @@ export class PostService {
     }
   }
 
-  async getOwnPosts(auth: any): Promise<ApiResponse<Post[]>> {
+  async getOwnPosts(auth: Auth): Promise<ApiResponse<Post[]>> {
     try {
       const posts = await this.postModel
-        .find({ auth: auth._id })
+        .find({ auth: auth.id })
         .populate('auth')
         .sort({ createdAt: -1 })
         .exec();
@@ -93,7 +93,11 @@ export class PostService {
   async deletePostById(id: string): Promise<ApiResponse<string>> {
     try {
       const post = await this.postModel
-        .findByIdAndUpdate(id, { isActive: false }, { new: true })
+        .findOneAndUpdate(
+          { _id: id, isActive: true },
+          { isActive: false },
+          { new: true }
+        )
         .exec();
       return {
         data: `${post.title} is deleted`,
@@ -131,6 +135,33 @@ export class PostService {
       return {
         data: `${post.title} is updated`,
         message: 'Paylaşım güncelleme işlemi başarılı',
+        statusCode: 200,
+        isSuccessful: true,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
+  async getPaginatedPosts(
+    page: number,
+    limit: number
+  ): Promise<ApiResponse<Post[]>> {
+    try {
+      const startIndex = (page - 1) * limit;
+      const posts = await this.postModel
+        .find({ isActive: true })
+        .populate('auth')
+        .sort({ createdAt: -1 })
+        .skip(startIndex)
+        .limit(limit)
+        .exec();
+
+      const total = await this.postModel.countDocuments({ isActive: true });
+      console.log('Total post:', total);
+      return {
+        data: posts,
+        message: 'Posts fetched',
         statusCode: 200,
         isSuccessful: true,
       };
