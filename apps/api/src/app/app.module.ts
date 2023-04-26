@@ -24,7 +24,7 @@ import { ReviewModule } from './review/review.module';
     PostModule,
     ReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      include: [PostModule],
+      include: [PostModule, ReviewModule],
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),

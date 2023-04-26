@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -50,6 +51,14 @@ export class ReviewController {
     return await this.reviewService.getReviewsByPostId(postId);
   }
 
+  @Patch(':id')
+  async deleteReviewById(
+    @Param('id') id: string,
+    @GetUser() auth: Auth
+  ): Promise<ApiResponse<string>> {
+    return await this.reviewService.deleteReviewById(id, auth);
+  }
+
   @Put(':id')
   async updateReviewById(
     @Param('id') id: string,
@@ -57,13 +66,5 @@ export class ReviewController {
     @GetUser() auth: Auth
   ): Promise<ApiResponse<Review>> {
     return await this.reviewService.updateReviewById(id, updateReviewDto, auth);
-  }
-
-  @Delete(':id')
-  async deleteReviewById(
-    @Param('id') id: string,
-    @GetUser() auth: Auth
-  ): Promise<string> {
-    return await this.reviewService.deleteReviewById(id, auth);
   }
 }
