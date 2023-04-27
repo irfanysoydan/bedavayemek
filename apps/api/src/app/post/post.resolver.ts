@@ -3,6 +3,8 @@ import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { AuthDto } from '../auth/dto/auth.dto';
+import { ApiResponse } from '../_core/response/api-response.dto';
+import { ResponsePost } from '../_core/response/response-post.type';
 
 @Resolver()
 export class PostResolver {
@@ -18,10 +20,10 @@ export class PostResolver {
     return post.data;
   }
 
-  @Query(() => [Post])
-  async getPosts() {
+  @Query(() => ResponsePost)
+  async getPosts(): Promise<ApiResponse<Post[]>> {
     const posts = await this.postService.getPosts();
-    return posts.data;
+    return posts;
   }
 
   @Query(() => [Post])

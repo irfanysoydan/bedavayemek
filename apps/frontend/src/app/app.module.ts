@@ -38,6 +38,7 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
 import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
+import { ApolloModule } from 'apollo-angular';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { EditReviewComponent } from './modules/review/edit-review/edit-review.co
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ApolloModule,
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,

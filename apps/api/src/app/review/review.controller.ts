@@ -64,7 +64,7 @@ export class ReviewController {
     @Param('id') id: string,
     @Body() updateReviewDto: CreateReviewDto,
     @GetUser() auth: Auth
-  ): Promise<ApiResponse<Review>> {
+  ): Promise<ApiResponse<string>> {
     return await this.reviewService.updateReviewById(id, updateReviewDto, auth);
   }
 }
