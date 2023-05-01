@@ -38,7 +38,18 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
 import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
-import { ApolloModule } from 'apollo-angular';
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+
+const uri = 'http://localhost:3333/graphql'; // GraphQL endpoint URL
+
+export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+  return {
+    link: httpLink.create({ uri }),
+    cache: new InMemoryCache(),
+  };
+}
 
 @NgModule({
   declarations: [
@@ -79,7 +90,17 @@ import { ApolloModule } from 'apollo-angular';
     MatSelectModule,
     MatMenuModule,
   ],
-  providers: [AuthService, PostService, ReviewService, MatSnackBar],
+  providers: [
+    AuthService,
+    PostService,
+    ReviewService,
+    MatSnackBar,
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

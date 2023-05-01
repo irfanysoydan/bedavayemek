@@ -30,10 +30,9 @@ export class PostService {
         query: this.GET_POSTS,
       })
       .pipe(map((result) => result.data.getPosts));
-    console.log(posts);
-    return posts;
 
-    // return this.http.get<ResponseModel>(this.apiUrl + 'post', httpOptions);
+    console.log('posts', posts);
+    return posts;
   }
 
   getOwnPosts(): Observable<ResponseModel> {

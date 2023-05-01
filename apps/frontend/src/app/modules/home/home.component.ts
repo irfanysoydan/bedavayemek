@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     console.log(this.isLoading);
     this.postService.getPosts().subscribe((data) => {
+      console.log('data', data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;
