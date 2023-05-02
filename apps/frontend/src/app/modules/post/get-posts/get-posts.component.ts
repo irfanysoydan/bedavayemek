@@ -25,9 +25,7 @@ export class GetPostsComponent implements OnInit {
 
   getPosts() {
     this.isLoading = true;
-    console.log(this.isLoading);
     this.postService.getOwnPosts().subscribe((data) => {
-      console.log(data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;

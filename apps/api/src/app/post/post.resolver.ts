@@ -1,12 +1,16 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { AuthDto } from '../auth/dto/auth.dto';
 import { ApiResponse } from '../_core/response/api-response.dto';
 import { ResponsePost } from '../_core/response/response-post.type';
+import { UseGuards } from '@nestjs/common';
+import { GetUser } from '../auth/decorators/graphql-ctx.decorator';
+import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
 
 @Resolver()
+@UseGuards(JwtAuthGuard)
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
@@ -26,18 +30,16 @@ export class PostResolver {
     return posts;
   }
 
-  @Query(() => [Post])
-  async getOwnPosts(@Args('auth') authDto: AuthDto) {
+  @Query(() => ResponsePost)
+  async getOwnPosts(@GetUser() authDto: AuthDto): Promise<ApiResponse<Post[]>> {
     const posts = await this.postService.getOwnPosts(authDto);
-    console.log(posts);
-    return posts.data;
+    return posts;
   }
 
-  @Query(() => Post)
-  async getPostById(@Args('id') id: string) {
+  @Query(() => ResponsePost)
+  async getPostById(@Args('id') id: string): Promise<ApiResponse<Post>> {
     const post = await this.postService.getPostById(id);
-    console.log(post);
-    return post.data;
+    return post;
   }
 
   @Mutation(() => String)

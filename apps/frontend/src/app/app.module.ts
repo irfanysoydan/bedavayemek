@@ -47,6 +47,9 @@ const uri = 'http://localhost:3333/graphql'; // GraphQL endpoint URL
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
     link: httpLink.create({ uri }),
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+    },
     cache: new InMemoryCache(),
   };
 }

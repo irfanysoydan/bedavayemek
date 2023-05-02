@@ -30,10 +30,10 @@ export class PostController {
     return await this.postService.createPost(createPostDto, auth);
   }
 
-  @Get()
-  async getPosts(): Promise<ApiResponse<Postie[]>> {
-    return await this.postService.getPosts();
-  }
+  // @Get()
+  // async getPosts(): Promise<ApiResponse<Postie[]>> {
+  //   return await this.postService.getPosts();
+  // }
 
   @Get('own')
   async getOwnPosts(@GetUser() auth: Auth): Promise<ApiResponse<Postie[]>> {

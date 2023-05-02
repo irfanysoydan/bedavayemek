@@ -30,3 +30,34 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const GET_OWN_POSTS = gql`
+  query {
+    getOwnPosts {
+      data {
+        id
+        title
+        description
+        image
+        location
+        expireDate
+        rating
+        isActive
+        auth {
+          id
+          firstName
+          lastName
+          username
+          email
+          password
+          rating
+          avatar
+          isActive
+        }
+      }
+      message
+      statusCode
+      isSuccessful
+    }
+  }
+`;

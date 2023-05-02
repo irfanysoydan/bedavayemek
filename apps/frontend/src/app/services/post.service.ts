@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Post } from '../models/post.model';
-import { GET_POSTS } from '../graphql/post.graphql';
+import { GET_OWN_POSTS, GET_POSTS } from '../graphql/post.graphql';
 import { Apollo } from 'apollo-angular';
 
 const httpOptions = {
@@ -23,20 +23,30 @@ export class PostService {
 
   apiUrl = 'http://localhost:3333/api/';
   GET_POSTS = GET_POSTS;
+  GET_OWN_POSTS = GET_OWN_POSTS;
 
   getPosts(): Observable<ResponseModel> {
-    const posts = this.apollo
-      .query<any>({
+    return this.apollo
+      .watchQuery<any>({
         query: this.GET_POSTS,
       })
-      .pipe(map((result) => result.data.getPosts));
-
-    console.log('posts', posts);
-    return posts;
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getPosts;
+        })
+      );
   }
 
   getOwnPosts(): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(this.apiUrl + 'post/own', httpOptions);
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_OWN_POSTS,
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getOwnPosts;
+        })
+      );
   }
 
   getPostById(id: string): Observable<ResponseModel> {
