@@ -15,7 +15,7 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async create(createAuthDto: CreateAuthDto): Promise<ApiResponse<Auth>> {
+  async register(createAuthDto: CreateAuthDto): Promise<ApiResponse<Auth>> {
     try {
       const { firstName, lastName, username, email, password } = createAuthDto;
       const salt = await bcrypt.genSalt();
@@ -54,9 +54,7 @@ export class AuthService {
     }
   }
 
-  async login(
-    loginDto: LoginDto
-  ): Promise<ApiResponse<{ accessToken: string }>> {
+  async login(loginDto: LoginDto): Promise<ApiResponse<string>> {
     const { email, password } = loginDto;
     const user = await this.authModel.findOne({ email, isActive: true }).exec();
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -67,14 +65,14 @@ export class AuthService {
       });
 
       return {
-        data: { accessToken },
+        data: accessToken,
         message: 'Giriş Başarılı',
         statusCode: 200,
         isSuccessful: true,
       };
     } else {
       return {
-        data: null,
+        data: "",
         message: 'Kullanıcı adı veya şifre hatalı.',
         statusCode: 401,
         isSuccessful: false,

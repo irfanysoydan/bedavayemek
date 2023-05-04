@@ -50,8 +50,10 @@ export class LoginComponent implements OnInit {
       this._snackBar.open(data.message, 'Tamam', {
         duration: 2000,
       });
-      localStorage.setItem('accessToken', data.data.accessToken);
-      this.router.navigateByUrl('/');
+      localStorage.setItem('accessToken', data.data);
+
+      this.router.navigate(['/']);
+
       this.isLoading = false;
     });
   }

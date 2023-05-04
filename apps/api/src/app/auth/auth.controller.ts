@@ -10,17 +10,15 @@ import { ApiResponse } from '../_core/response/api-response.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  async register(
-    @Body() createAuthDto: CreateAuthDto
-  ): Promise<ApiResponse<Auth>> {
-    return this.authService.create(createAuthDto);
-  }
+  // @Post('register')
+  // async register(
+  //   @Body() createAuthDto: CreateAuthDto
+  // ): Promise<ApiResponse<Auth>> {
+  //   return this.authService.register(createAuthDto);
+  // }
 
-  @Post('login')
-  async login(
-    @Body() loginDto: LoginDto
-  ): Promise<ApiResponse<{ accessToken: string }>> {
-    return this.authService.login(loginDto);
-  }
+  // @Post('login')
+  // async login(@Body() loginDto: LoginDto): Promise<ApiResponse<string>> {
+  //   return this.authService.login(loginDto);
+  // }
 }
