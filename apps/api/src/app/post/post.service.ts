@@ -60,7 +60,7 @@ export class PostService {
   async getOwnPosts(auth: Auth): Promise<ApiResponse<Post[]>> {
     try {
       const posts = await this.postModel
-        .find({ auth: auth.id })
+        .find({ auth: auth.id, isActive: true })
         .populate('auth')
         .sort({ createdAt: -1 })
         .exec();
@@ -92,7 +92,7 @@ export class PostService {
 
   async deletePostById(id: string): Promise<ApiResponse<string>> {
     try {
-      const post = await this.postModel
+      await this.postModel
         .findOneAndUpdate(
           { _id: id, isActive: true },
           { isActive: false },
@@ -100,7 +100,7 @@ export class PostService {
         )
         .exec();
       return {
-        data: `${post.title} is deleted`,
+        data: '',
         message: 'Paylaşımı silme işlemi başarılı',
         statusCode: 200,
         isSuccessful: true,
@@ -131,9 +131,8 @@ export class PostService {
           { new: true }
         )
         .exec();
-      console.log(post);
       return {
-        data: `${post.title} is updated`,
+        data: '',
         message: 'Paylaşım güncelleme işlemi başarılı',
         statusCode: 200,
         isSuccessful: true,

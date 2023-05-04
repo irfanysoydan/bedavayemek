@@ -34,7 +34,6 @@ export class ReviewService {
       review = await (await review.populate('post')).populate('post.auth');
       review = await review.populate('auth');
 
-      console.log(review);
       return {
         data: review,
         message: 'Yorum ekleme işlemi başarılı.',
@@ -60,7 +59,6 @@ export class ReviewService {
         .sort({ createdAt: -1 })
         .exec();
 
-      console.log(reviews[0]);
       if (!reviews) throw new NotFoundException('Reviews not found!');
 
       return {
@@ -84,7 +82,6 @@ export class ReviewService {
         .exec();
 
       if (!reviews) throw new NotFoundException('Reviews not found!');
-      console.log(reviews);
       return {
         data: reviews,
         message: 'Yorumlar başarıyla getirildi.',
@@ -104,7 +101,6 @@ export class ReviewService {
         .populate('auth')
         .exec();
 
-        console.log(review);
       return {
         data: review,
         message: 'Yorum başarıyla getirildi.',

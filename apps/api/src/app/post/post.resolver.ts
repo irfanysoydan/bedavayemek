@@ -1,36 +1,39 @@
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { AuthDto } from '../auth/dto/auth.dto';
 import { ApiResponse } from '../_core/response/api-response.dto';
-import { ResponsePost } from '../_core/response/response-post.type';
+import {
+  ResponsePost,
+  ResponsePostArray,
+  ResponsePostNull,
+} from '../_core/response/response-post.type';
 import { UseGuards } from '@nestjs/common';
-import { GetUser } from '../auth/decorators/graphql-ctx.decorator';
-import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { GqlAuthGuard } from '../auth/jwt/gql-auth.guard';
 
 @Resolver()
-@UseGuards(JwtAuthGuard)
+@UseGuards(GqlAuthGuard)
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
-  @Mutation(() => Post)
+  @Mutation(() => ResponsePost)
   async createPost(
     @Args('createPostDto') createPostDto: CreatePostDto,
-    @Args('auth') authDto: AuthDto
-  ) {
+    @GetUser('auth') authDto: AuthDto
+  ): Promise<ApiResponse<Post>> {
     const post = await this.postService.createPost(createPostDto, authDto);
-    console.log(post);
-    return post.data;
+    return post;
   }
 
-  @Query(() => ResponsePost)
+  @Query(() => ResponsePostArray)
   async getPosts(): Promise<ApiResponse<Post[]>> {
     const posts = await this.postService.getPosts();
     return posts;
   }
 
-  @Query(() => ResponsePost)
+  @Query(() => ResponsePostArray)
   async getOwnPosts(@GetUser() authDto: AuthDto): Promise<ApiResponse<Post[]>> {
     const posts = await this.postService.getOwnPosts(authDto);
     return posts;
@@ -42,21 +45,19 @@ export class PostResolver {
     return post;
   }
 
-  @Mutation(() => String)
-  async deletePostById(@Args('id') id: string) {
+  @Mutation(() => ResponsePostNull)
+  async deletePostById(@Args('id') id: string): Promise<ApiResponse<string>> {
     const post = await this.postService.deletePostById(id);
-    console.log(post);
-    return post.data;
+    return post;
   }
 
-  @Mutation(() => String)
+  @Mutation(() => ResponsePostNull)
   async updatePostById(
     @Args('id') id: string,
     @Args('createPostDto') createPostDto: CreatePostDto
-  ) {
+  ): Promise<ApiResponse<string>> {
     const post = await this.postService.updatePostById(id, createPostDto);
-    console.log(post);
-    return post.data;
+    return post;
   }
 
   @Query(() => [Post])

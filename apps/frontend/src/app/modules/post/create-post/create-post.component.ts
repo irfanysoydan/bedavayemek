@@ -32,7 +32,6 @@ export class CreatePostComponent implements OnInit {
   });
 
   createPost() {
-    console.log(this.form.invalid);
     if (this.form.invalid) {
       this._snackBar.open('Lütfen tüm alanları doldurun.', 'Tamam', {
         duration: 3000,
@@ -41,8 +40,7 @@ export class CreatePostComponent implements OnInit {
     }
     this.isLoading = true;
 
-    const post: Post = {
-      id: '',
+    const post: any = {
       title: this.form.value.title,
       description: this.form.value.description,
       image: this.dataURI,

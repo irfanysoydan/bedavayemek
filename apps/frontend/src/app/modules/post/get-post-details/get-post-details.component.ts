@@ -109,7 +109,6 @@ export class GetPostDetailsComponent implements OnInit {
             return;
           }
           this.post = data.data;
-          console.log(this.post);
         });
 
       this._snackBar.open('Yorumunuz başarıyla eklendi', 'Tamam', {

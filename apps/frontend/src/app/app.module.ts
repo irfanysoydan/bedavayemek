@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
@@ -40,19 +40,11 @@ import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.co
 import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { InMemoryCache } from '@apollo/client/core';
 
-const uri = 'http://localhost:3333/graphql'; // GraphQL endpoint URL
-
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-  return {
-    link: httpLink.create({ uri }),
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-    },
-    cache: new InMemoryCache(),
-  };
-}
+const httpOptions: HttpHeaders = new HttpHeaders({
+  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+});
 
 @NgModule({
   declarations: [
@@ -73,11 +65,11 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     EditReviewComponent,
   ],
   imports: [
+    ApolloModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ApolloModule,
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
@@ -98,9 +90,18 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     PostService,
     ReviewService,
     MatSnackBar,
+
     {
       provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:3333/graphql',
+            headers: httpOptions,
+          }),
+        };
+      },
       deps: [HttpLink],
     },
   ],

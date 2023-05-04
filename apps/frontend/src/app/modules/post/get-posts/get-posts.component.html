@@ -50,7 +50,7 @@
           </button>
           <mat-menu #menu="matMenu">
             <button [routerLink]="['/edit-post', post.id]" mat-menu-item>Düzenle</button>
-            <button mat-menu-item>Sil</button>
+            <button mat-menu-item (click)="deletePost(post.id)">Sil</button>
           </mat-menu>
         </div>
         <!-- Yol Tarifi Butonu -->

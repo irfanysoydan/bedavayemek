@@ -2,6 +2,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../services/post.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'bedavayemek-get-posts',
@@ -11,6 +12,7 @@ import { PostService } from '../../../services/post.service';
 export class GetPostsComponent implements OnInit {
   constructor(
     private postService: PostService,
+    private _snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -21,7 +23,7 @@ export class GetPostsComponent implements OnInit {
   showShareLink: { [key: string]: boolean } = {};
   showFullDescription = new Map<string, boolean>();
   isLoading = false;
-  posts: Post[] = [];
+  posts!: Post[];
 
   getPosts() {
     this.isLoading = true;
@@ -31,6 +33,24 @@ export class GetPostsComponent implements OnInit {
         return;
       }
       this.posts = data.data;
+      this.isLoading = false;
+    });
+  }
+
+  deletePost(postId: string) {
+    this.isLoading = true;
+    this.postService.deletePost(postId).subscribe((data) => {
+      if (!data.isSuccessful) {
+        this._snackBar.open(data.message, 'Tamam', {
+          duration: 2000,
+        });
+        this.isLoading = false;
+        return;
+      }
+      this._snackBar.open(data.message, 'Tamam', {
+        duration: 2000,
+      });
+      window.location.reload();
       this.isLoading = false;
     });
   }

@@ -3,7 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Post } from '../models/post.model';
-import { GET_OWN_POSTS, GET_POSTS } from '../graphql/post.graphql';
+import {
+  CREATE_POST,
+  DELETE_POST,
+  GET_OWN_POSTS,
+  GET_POSTS,
+  GET_POST_BY_ID,
+  UPDATE_POST,
+} from '../graphql/post.graphql';
 import { Apollo } from 'apollo-angular';
 
 const httpOptions = {
@@ -22,8 +29,27 @@ export class PostService {
   }
 
   apiUrl = 'http://localhost:3333/api/';
+  CREATE_POST = CREATE_POST;
   GET_POSTS = GET_POSTS;
   GET_OWN_POSTS = GET_OWN_POSTS;
+  GET_POST_BY_ID = GET_POST_BY_ID;
+  DELETE_POST = DELETE_POST;
+  UPDATE_POST = UPDATE_POST;
+
+  createPost(post: Post): Observable<ResponseModel> {
+    return this.apollo
+      .mutate<any>({
+        mutation: this.CREATE_POST,
+        variables: {
+          post,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.createPost;
+        })
+      );
+  }
 
   getPosts(): Observable<ResponseModel> {
     return this.apollo
@@ -50,33 +76,48 @@ export class PostService {
   }
 
   getPostById(id: string): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(
-      this.apiUrl + 'post/' + id,
-      httpOptions
-    );
-  }
-
-  createPost(post: Post): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(
-      this.apiUrl + 'post',
-      post,
-      httpOptions
-    );
-  }
-
-  updatePostById(id: string, post: Post): Observable<ResponseModel> {
-    return this.http.put<ResponseModel>(
-      this.apiUrl + 'post/' + id,
-      post,
-      httpOptions
-    );
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_POST_BY_ID,
+        variables: {
+          id,
+        },
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getPostById;
+        })
+      );
   }
 
   deletePost(id: string): Observable<ResponseModel> {
-    console.log(httpOptions);
-    return this.http.patch<ResponseModel>(
-      this.apiUrl + 'post/' + id,
-      httpOptions
-    );
+    return this.apollo
+      .mutate<any>({
+        mutation: this.DELETE_POST,
+        variables: {
+          id,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.deletePostById;
+        })
+      );
+  }
+
+  updatePostById(id: string, post: Post): Observable<ResponseModel> {
+    return this.apollo
+      .mutate<any>({
+        mutation: this.UPDATE_POST,
+        variables: {
+          id,
+          post,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.updatePostById;
+        })
+      );
   }
 }
