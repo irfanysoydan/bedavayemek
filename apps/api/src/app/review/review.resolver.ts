@@ -3,63 +3,77 @@ import { ReviewService } from './review.service';
 import { Review } from './entities/review.entity';
 import { AuthDto } from '../auth/dto/auth.dto';
 import { CreateReviewDto } from './dto/create-review.dto';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { ApiResponse } from '../_core/response/api-response.dto';
+import {
+  ResponseReview,
+  ResponseReviewArray,
+  ResponseReviewString,
+} from '../_core/response/response-review.type';
 
 @Resolver()
 export class ReviewResolver {
   constructor(private reviewService: ReviewService) {}
 
-  @Mutation(() => Review)
+  @Mutation(() => ResponseReview)
   async createReview(
     @Args('createReviewDto') createReviewDto: CreateReviewDto,
-    @Args('auth') authDto: AuthDto,
-    @Args('postId') postId: string
-  ) {
+    @Args('postId') postId: string,
+    @GetUser('auth') authDto: AuthDto
+  ): Promise<ApiResponse<Review>> {
     const review = await this.reviewService.createReview(
       createReviewDto,
       authDto,
       postId
     );
-    return review.data;
+    return review;
   }
 
-  @Query(() => [Review])
-  async getReviewsByPostId(@Args('postId') postId: string) {
+  @Query(() => ResponseReviewArray)
+  async getReviewsByPostId(
+    @Args('postId') postId: string
+  ): Promise<ApiResponse<Review[]>> {
     const reviews = await this.reviewService.getReviewsByPostId(postId);
-    return reviews.data;
+    return reviews;
   }
 
-  @Query(() => [Review])
-  async getOwnReviews(@Args('auth') authDto: AuthDto) {
+  @Query(() => ResponseReviewArray)
+  async getOwnReviews(
+    @Args('auth') authDto: AuthDto
+  ): Promise<ApiResponse<Review[]>> {
     const reviews = await this.reviewService.getOwnReviews(authDto);
-    return reviews.data;
+    return reviews;
   }
 
-  @Query(() => Review)
-  async getReviewById(@Args('id') id: string, @Args('auth') authDto: AuthDto) {
+  @Query(() => ResponseReview)
+  async getReviewById(
+    @Args('id') id: string,
+    @GetUser('auth') authDto: AuthDto
+  ): Promise<ApiResponse<Review>> {
     const review = await this.reviewService.getReviewById(id, authDto);
-    return review.data;
+    return review;
   }
 
-  @Mutation(() => String)
+  @Mutation(() => ResponseReviewString)
   async deleteReviewById(
     @Args('id') id: string,
     @Args('auth') authDto: AuthDto
-  ) {
+  ): Promise<ApiResponse<string>> {
     const review = await this.reviewService.deleteReviewById(id, authDto);
-    return review.message;
+    return review;
   }
 
-  @Mutation(() => String)
+  @Mutation(() => ResponseReviewString)
   async updateReviewById(
     @Args('id') id: string,
     @Args('createReviewDto') createReviewDto: CreateReviewDto,
-    @Args('auth') authDto: AuthDto
-  ) {
+    @GetUser('auth') authDto: AuthDto
+  ): Promise<ApiResponse<string>> {
     const review = await this.reviewService.updateReviewById(
       id,
       createReviewDto,
       authDto
     );
-    return review.data;
+    return review;
   }
 }

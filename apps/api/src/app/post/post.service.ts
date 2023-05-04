@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Auth } from '../auth/entities/auth.entity';
@@ -78,6 +82,8 @@ export class PostService {
   async getPostById(id: string): Promise<ApiResponse<Post>> {
     try {
       const post = await this.postModel.findById(id).populate('auth').exec();
+
+      if (!post) throw new NotFoundException('Post not found!');
 
       return {
         data: post,

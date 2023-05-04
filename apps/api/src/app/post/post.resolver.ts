@@ -7,7 +7,7 @@ import { ApiResponse } from '../_core/response/api-response.dto';
 import {
   ResponsePost,
   ResponsePostArray,
-  ResponsePostNull,
+  ResponsePostString,
 } from '../_core/response/response-post.type';
 import { UseGuards } from '@nestjs/common';
 import { GetUser } from '../auth/decorators/get-user.decorator';
@@ -45,13 +45,13 @@ export class PostResolver {
     return post;
   }
 
-  @Mutation(() => ResponsePostNull)
+  @Mutation(() => ResponsePostString)
   async deletePostById(@Args('id') id: string): Promise<ApiResponse<string>> {
     const post = await this.postService.deletePostById(id);
     return post;
   }
 
-  @Mutation(() => ResponsePostNull)
+  @Mutation(() => ResponsePostString)
   async updatePostById(
     @Args('id') id: string,
     @Args('createPostDto') createPostDto: CreatePostDto

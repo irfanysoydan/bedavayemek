@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Review } from '../models/review.model';
+import { Apollo } from 'apollo-angular';
+import { GET_REVIEWS_BY_POST_ID } from '../graphql/review.graphql';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,7 +14,7 @@ const httpOptions = {
 
 @Injectable()
 export class ReviewService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private apollo: Apollo) {
     httpOptions.headers = httpOptions.headers.set(
       'Authorization',
       'Bearer ' + localStorage.getItem('accessToken')
@@ -20,6 +22,7 @@ export class ReviewService {
   }
 
   apiUrl = 'http://localhost:3333/api/';
+  GET_REVIEWS_BY_POST_ID = GET_REVIEWS_BY_POST_ID;
 
   createReview(review: Review, postId: string): Observable<ResponseModel> {
     return this.http.post<ResponseModel>(
@@ -30,10 +33,18 @@ export class ReviewService {
   }
 
   getReviewsByPostId(postId: string): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(
-      this.apiUrl + 'review/post/' + postId,
-      httpOptions
-    );
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_REVIEWS_BY_POST_ID,
+        variables: {
+          postId,
+        },
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getReviewsByPostId;
+        })
+      );
   }
 
   getReviewById(reviewId: string): Observable<ResponseModel> {
@@ -47,7 +58,7 @@ export class ReviewService {
     return this.http.get<ResponseModel>(this.apiUrl + 'review', httpOptions);
   }
 
-  updateReviewById(id:string, review: Review): Observable<ResponseModel> {
+  updateReviewById(id: string, review: Review): Observable<ResponseModel> {
     return this.http.put<ResponseModel>(
       this.apiUrl + 'review/' + id,
       review,

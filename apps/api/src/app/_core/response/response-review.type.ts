@@ -1,10 +1,10 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Post } from '../../post/entities/post.entity';
+import { Review } from '../../review/entities/review.entity';
 
 @ObjectType()
-export class ResponsePost {
-  @Field(() => Post)
-  data: Post;
+export class ResponseReview {
+  @Field(() => Review)
+  data: Review;
 
   @Field()
   message: string;
@@ -17,9 +17,9 @@ export class ResponsePost {
 }
 
 @ObjectType()
-export class ResponsePostArray {
-  @Field(() => [Post])
-  data: Post[];
+export class ResponseReviewArray {
+  @Field(() => [Review])
+  data: Review[];
 
   @Field()
   message: string;
@@ -32,8 +32,7 @@ export class ResponsePostArray {
 }
 
 @ObjectType()
-export class ResponsePostString {
-
+export class ResponseReviewString {
   @Field()
   data: string;
 

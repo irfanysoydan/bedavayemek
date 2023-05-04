@@ -114,7 +114,7 @@ export class ReviewService {
 
   async deleteReviewById(id: string, auth: Auth): Promise<ApiResponse<string>> {
     try {
-      const review = await this.reviewModel
+      await this.reviewModel
         .findOneAndUpdate(
           { _id: id, auth: auth.id, isActive: true },
           { isActive: false },
@@ -123,7 +123,7 @@ export class ReviewService {
         .exec();
 
       return {
-        data: `${review.comment} is deleted`,
+        data: "",
         message: 'Yorum başarıyla silindi.',
         statusCode: 200,
         isSuccessful: true,
@@ -151,7 +151,7 @@ export class ReviewService {
       if (!review) throw new NotFoundException('Review not found!');
 
       return {
-        data: `${review.comment} is updated`,
+        data: "",
         message: 'Yorum başarıyla güncellendi.',
         statusCode: 200,
         isSuccessful: true,
