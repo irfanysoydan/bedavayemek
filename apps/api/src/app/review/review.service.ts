@@ -53,13 +53,13 @@ export class ReviewService {
   async getReviewsByPostId(postId: string): Promise<ApiResponse<Review[]>> {
     try {
       const reviews = await this.reviewModel
-        .find({ post: postId })
+        .find({ post: postId, isActive: true })
         .populate({ path: 'post', populate: { path: 'auth' } })
         .populate('auth')
         .sort({ createdAt: -1 })
         .exec();
-
       if (!reviews) throw new NotFoundException('Reviews not found!');
+      console.log("servisten dönen", reviews);
 
       return {
         data: reviews,
@@ -75,12 +75,11 @@ export class ReviewService {
   async getOwnReviews(auth: Auth): Promise<ApiResponse<Review[]>> {
     try {
       const reviews = await this.reviewModel
-        .find({ auth: auth.id })
+        .find({ auth: auth.id, isActive: true })
         .populate({ path: 'post', populate: { path: 'auth' } })
         .populate('auth')
         .sort({ createdAt: -1 })
         .exec();
-
       if (!reviews) throw new NotFoundException('Reviews not found!');
       return {
         data: reviews,
@@ -123,7 +122,7 @@ export class ReviewService {
         .exec();
 
       return {
-        data: "",
+        data: '',
         message: 'Yorum başarıyla silindi.',
         statusCode: 200,
         isSuccessful: true,
@@ -142,7 +141,7 @@ export class ReviewService {
       const { rating, comment, image } = updateReviewDto;
       const review = await this.reviewModel
         .findOneAndUpdate(
-          { _id: id, auth: auth.id },
+          { _id: id, auth: auth.id, isActive: true },
           { rating, comment, image },
           { new: true }
         )
@@ -151,7 +150,7 @@ export class ReviewService {
       if (!review) throw new NotFoundException('Review not found!');
 
       return {
-        data: "",
+        data: '',
         message: 'Yorum başarıyla güncellendi.',
         statusCode: 200,
         isSuccessful: true,

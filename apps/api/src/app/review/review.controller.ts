@@ -22,49 +22,49 @@ import { ApiResponse } from '../_core/response/api-response.dto';
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
 
-  @Post('post/:postId')
-  async createReview(
-    @Body() createReviewDto: CreateReviewDto,
-    @GetUser() auth: Auth,
-    @Param('postId') postId: string
-  ): Promise<ApiResponse<Review>> {
-    return await this.reviewService.createReview(createReviewDto, auth, postId);
-  }
+  // @Post('post/:postId')
+  // async createReview(
+  //   @Body() createReviewDto: CreateReviewDto,
+  //   @GetUser() auth: Auth,
+  //   @Param('postId') postId: string
+  // ): Promise<ApiResponse<Review>> {
+  //   return await this.reviewService.createReview(createReviewDto, auth, postId);
+  // }
 
-  @Get()
-  async getAllReviews(@GetUser() auth: Auth): Promise<ApiResponse<Review[]>> {
-    return await this.reviewService.getOwnReviews(auth);
-  }
+  // @Get()
+  // async getAllReviews(@GetUser() auth: Auth): Promise<ApiResponse<Review[]>> {
+  //   return await this.reviewService.getOwnReviews(auth);
+  // }
 
-  @Get(':id')
-  async getReviewById(
-    @Param('id') id: string,
-    @GetUser() auth: Auth
-  ): Promise<ApiResponse<Review>> {
-    return await this.reviewService.getReviewById(id, auth);
-  }
+  // @Get(':id')
+  // async getReviewById(
+  //   @Param('id') id: string,
+  //   @GetUser() auth: Auth
+  // ): Promise<ApiResponse<Review>> {
+  //   return await this.reviewService.getReviewById(id, auth);
+  // }
 
-  @Get('post/:postId')
-  async getReviewsByPostId(
-    @Param('postId') postId: string
-  ): Promise<ApiResponse<Review[]>> {
-    return await this.reviewService.getReviewsByPostId(postId);
-  }
+  // @Get('post/:postId')
+  // async getReviewsByPostId(
+  //   @Param('postId') postId: string
+  // ): Promise<ApiResponse<Review[]>> {
+  //   return await this.reviewService.getReviewsByPostId(postId);
+  // }
 
-  @Patch(':id')
-  async deleteReviewById(
-    @Param('id') id: string,
-    @GetUser() auth: Auth
-  ): Promise<ApiResponse<string>> {
-    return await this.reviewService.deleteReviewById(id, auth);
-  }
+  // @Patch(':id')
+  // async deleteReviewById(
+  //   @Param('id') id: string,
+  //   @GetUser() auth: Auth
+  // ): Promise<ApiResponse<string>> {
+  //   return await this.reviewService.deleteReviewById(id, auth);
+  // }
 
-  @Put(':id')
-  async updateReviewById(
-    @Param('id') id: string,
-    @Body() updateReviewDto: CreateReviewDto,
-    @GetUser() auth: Auth
-  ): Promise<ApiResponse<string>> {
-    return await this.reviewService.updateReviewById(id, updateReviewDto, auth);
-  }
+  // @Put(':id')
+  // async updateReviewById(
+  //   @Param('id') id: string,
+  //   @Body() updateReviewDto: CreateReviewDto,
+  //   @GetUser() auth: Auth
+  // ): Promise<ApiResponse<string>> {
+  //   return await this.reviewService.updateReviewById(id, updateReviewDto, auth);
+  // }
 }

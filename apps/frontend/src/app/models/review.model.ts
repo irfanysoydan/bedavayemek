@@ -2,7 +2,7 @@ import { Auth } from './auth.model';
 import { Post } from './post.model';
 
 export class Review {
-  id?: string;
+  id!: string;
   rating!: number;
   comment?: string | null;
   image?: string | null;

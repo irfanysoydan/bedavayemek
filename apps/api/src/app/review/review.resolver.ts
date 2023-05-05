@@ -10,8 +10,11 @@ import {
   ResponseReviewArray,
   ResponseReviewString,
 } from '../_core/response/response-review.type';
+import { GqlAuthGuard } from '../auth/jwt/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class ReviewResolver {
   constructor(private reviewService: ReviewService) {}
 
@@ -34,12 +37,13 @@ export class ReviewResolver {
     @Args('postId') postId: string
   ): Promise<ApiResponse<Review[]>> {
     const reviews = await this.reviewService.getReviewsByPostId(postId);
+    console.log("resolverdan dönen", reviews);
     return reviews;
   }
 
   @Query(() => ResponseReviewArray)
   async getOwnReviews(
-    @Args('auth') authDto: AuthDto
+    @GetUser('auth') authDto: AuthDto
   ): Promise<ApiResponse<Review[]>> {
     const reviews = await this.reviewService.getOwnReviews(authDto);
     return reviews;
@@ -57,7 +61,7 @@ export class ReviewResolver {
   @Mutation(() => ResponseReviewString)
   async deleteReviewById(
     @Args('id') id: string,
-    @Args('auth') authDto: AuthDto
+    @GetUser('auth') authDto: AuthDto
   ): Promise<ApiResponse<string>> {
     const review = await this.reviewService.deleteReviewById(id, authDto);
     return review;

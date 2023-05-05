@@ -4,7 +4,14 @@ import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Review } from '../models/review.model';
 import { Apollo } from 'apollo-angular';
-import { GET_REVIEWS_BY_POST_ID } from '../graphql/review.graphql';
+import {
+  CREATE_REVIEW,
+  DELETE_REVIEW,
+  GET_OWN_REVIEWS,
+  GET_REVIEWS_BY_POST_ID,
+  GET_REVIEW_BY_ID,
+  UPDATE_REVIEW,
+} from '../graphql/review.graphql';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,14 +29,27 @@ export class ReviewService {
   }
 
   apiUrl = 'http://localhost:3333/api/';
+  CREATE_REVIEW = CREATE_REVIEW;
   GET_REVIEWS_BY_POST_ID = GET_REVIEWS_BY_POST_ID;
+  GET_OWN_REVIEWS = GET_OWN_REVIEWS;
+  GET_REVIEW_BY_ID = GET_REVIEW_BY_ID;
+  DELETE_REVIEW = DELETE_REVIEW;
+  UPDATE_REVIEW = UPDATE_REVIEW;
 
   createReview(review: Review, postId: string): Observable<ResponseModel> {
-    return this.http.post<ResponseModel>(
-      this.apiUrl + 'review/post/' + postId,
-      review,
-      httpOptions
-    );
+    return this.apollo
+      .mutate<any>({
+        mutation: this.CREATE_REVIEW,
+        variables: {
+          review,
+          postId,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.createReview;
+        })
+      );
   }
 
   getReviewsByPostId(postId: string): Observable<ResponseModel> {
@@ -47,22 +67,61 @@ export class ReviewService {
       );
   }
 
-  getReviewById(reviewId: string): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(
-      this.apiUrl + 'review/' + reviewId,
-      httpOptions
-    );
+  getReviewById(id: string): Observable<ResponseModel> {
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_REVIEW_BY_ID,
+        variables: {
+          id,
+        },
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getReviewById;
+        })
+      );
   }
 
   getReviews(): Observable<ResponseModel> {
-    return this.http.get<ResponseModel>(this.apiUrl + 'review', httpOptions);
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_OWN_REVIEWS,
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getOwnReviews;
+        })
+      );
+  }
+
+  deleteReviewById(id: string): Observable<ResponseModel> {
+    return this.apollo
+      .mutate<any>({
+        mutation: this.DELETE_REVIEW,
+        variables: {
+          id,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.deleteReviewById;
+        })
+      );
   }
 
   updateReviewById(id: string, review: Review): Observable<ResponseModel> {
-    return this.http.put<ResponseModel>(
-      this.apiUrl + 'review/' + id,
-      review,
-      httpOptions
-    );
+    return this.apollo
+      .mutate<any>({
+        mutation: this.UPDATE_REVIEW,
+        variables: {
+          id,
+          review,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.updateReviewById;
+        })
+      );
   }
 }

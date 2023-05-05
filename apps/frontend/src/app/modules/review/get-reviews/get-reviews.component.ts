@@ -29,16 +29,18 @@ export class GetReviewsComponent implements OnInit {
         this.isLoading = false;
         return;
       }
-      data.data.forEach(
-        (element: { post: { title: string | any[] }; title: string }) => {
-          if (element.post.title.length > 25) {
-            element.post.title = element.post.title.slice(0, 25) + '...';
-          }
-        }
-      );
       this.reviews = data.data;
       this.isLoading = false;
       this.isLoaded = true;
+    });
+  }
+
+  deleteReview(id: string) {
+    this.reviewService.deleteReviewById(id).subscribe((data) => {
+      if (!data.isSuccessful) {
+        return;
+      }
+      window.location.reload();
     });
   }
 }
