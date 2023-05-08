@@ -4,13 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Apollo } from 'apollo-angular';
-import { CREATE_USER, LOGIN_USER } from '../graphql/auth.graphql';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
+import { CREATE_USER, GET_USER, LOGIN_USER } from '../graphql/auth.graphql';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +13,7 @@ export class AuthService {
   apiUrl = 'http://localhost:3333/api/';
   CREATE_USER = CREATE_USER;
   LOGIN_USER = LOGIN_USER;
+  GET_USER = GET_USER;
 
   registerService(auth: Auth): Observable<ResponseModel> {
     return this.apollo
@@ -46,6 +41,18 @@ export class AuthService {
       .pipe(
         map((result) => {
           return result.data.login;
+        })
+      );
+  }
+
+  getAuth(): Observable<ResponseModel> {
+    return this.apollo
+      .watchQuery<any>({
+        query: this.GET_USER,
+      })
+      .valueChanges.pipe(
+        map((result) => {
+          return result.data.getAuth;
         })
       );
   }

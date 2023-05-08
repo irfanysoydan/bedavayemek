@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginDto } from './dto/login.dto';
 import { ApiResponse } from '../_core/response/api-response.dto';
+import * as fs from 'fs';
 
 @Injectable()
 export class AuthService {
@@ -20,14 +21,22 @@ export class AuthService {
       const { firstName, lastName, username, email, password } = createAuthDto;
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
+      const avatar =
+        'data:image/png;base64,' +
+        (
+          await fs.promises.readFile('./apps/api/src/assets/avatar.png')
+        ).toString('base64');
       const user = await this.authModel.create({
         firstName,
         lastName,
         username,
         email,
         password: hashedPassword,
-        avatar: '',
       });
+      await this.authModel.findOneAndUpdate(
+        { _id: user._id },
+        { avatar: avatar }
+      );
 
       return {
         data: user,
@@ -72,10 +81,32 @@ export class AuthService {
       };
     } else {
       return {
-        data: "",
+        data: '',
         message: 'Kullanıcı adı veya şifre hatalı.',
         statusCode: 401,
         isSuccessful: false,
+      };
+    }
+  }
+
+  async getAuth(auth: Auth): Promise<ApiResponse<Auth>> {
+    console.log(auth);
+    const user = await this.authModel
+      .findOne({ _id: auth.id, isActive: true })
+      .exec();
+    if (!user) {
+      return {
+        data: null,
+        message: 'Kullanıcı bulunamadı.',
+        statusCode: 404,
+        isSuccessful: false,
+      };
+    } else {
+      return {
+        data: user,
+        message: 'Kullanıcı bilgileri getirildi.',
+        statusCode: 200,
+        isSuccessful: true,
       };
     }
   }

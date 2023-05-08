@@ -35,6 +35,7 @@ export class PostResolver {
 
   @Query(() => ResponsePostArray)
   async getOwnPosts(@GetUser() authDto: AuthDto): Promise<ApiResponse<Post[]>> {
+    console.log(authDto);
     const posts = await this.postService.getOwnPosts(authDto);
     return posts;
   }

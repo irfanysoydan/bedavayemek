@@ -23,6 +23,7 @@ export class GetPostsComponent implements OnInit {
   showShareLink: { [key: string]: boolean } = {};
   showFullDescription = new Map<string, boolean>();
   isLoading = false;
+  isLoaded = false;
   posts!: Post[];
 
   getPosts() {
@@ -34,6 +35,7 @@ export class GetPostsComponent implements OnInit {
       }
       this.posts = data.data;
       this.isLoading = false;
+      this.isLoaded = true;
     });
   }
 

@@ -24,7 +24,6 @@ export class GetReviewsComponent implements OnInit {
   getReviews() {
     this.isLoading = true;
     this.reviewService.getReviews().subscribe((data) => {
-      console.log(data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;

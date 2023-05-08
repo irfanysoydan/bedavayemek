@@ -37,7 +37,6 @@ export class ReviewResolver {
     @Args('postId') postId: string
   ): Promise<ApiResponse<Review[]>> {
     const reviews = await this.reviewService.getReviewsByPostId(postId);
-    console.log("resolverdan dönen", reviews);
     return reviews;
   }
 

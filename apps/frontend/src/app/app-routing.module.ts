@@ -49,6 +49,11 @@ const routes: Routes = [
     component: EditReviewComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: ':username',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

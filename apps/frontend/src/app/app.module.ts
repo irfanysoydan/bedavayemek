@@ -38,6 +38,8 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
 import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
+import { ProfileComponent } from './modules/auth/profile/profile.component';
+
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
@@ -63,6 +65,7 @@ const httpOptions: HttpHeaders = new HttpHeaders({
     EditPostComponent,
     GetReviewsComponent,
     EditReviewComponent,
+    ProfileComponent,
   ],
   imports: [
     ApolloModule,

@@ -123,7 +123,7 @@ export class PostService {
     try {
       const { title, description, rating, image, location, expireDate } =
         createPostDto;
-      const post = await this.postModel
+      await this.postModel
         .findByIdAndUpdate(
           id,
           {

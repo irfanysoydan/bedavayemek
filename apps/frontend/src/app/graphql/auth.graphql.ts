@@ -31,3 +31,24 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const GET_USER = gql`
+  query {
+    getAuth {
+      data {
+        id
+        firstName
+        lastName
+        username
+        email
+        password
+        rating
+        avatar
+        isActive
+      }
+      message
+      statusCode
+      isSuccessful
+    }
+  }
+`;
