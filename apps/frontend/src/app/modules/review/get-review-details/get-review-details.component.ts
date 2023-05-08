@@ -31,7 +31,6 @@ export class GetReviewDetailsComponent implements OnInit {
   getReviewById(reviewId: string) {
     this.isLoading = true;
     this.reviewService.getReviewById(reviewId).subscribe((data) => {
-      console.log(data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;

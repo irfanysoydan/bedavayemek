@@ -59,7 +59,6 @@ export class ReviewService {
         .sort({ createdAt: -1 })
         .exec();
       if (!reviews) throw new NotFoundException('Reviews not found!');
-      console.log("servisten dönen", reviews);
 
       return {
         data: reviews,

@@ -8,6 +8,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginDto } from './dto/login.dto';
 import { ApiResponse } from '../_core/response/api-response.dto';
 import * as fs from 'fs';
+import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -89,8 +90,42 @@ export class AuthService {
     }
   }
 
+  async updateUserProfile(
+    userName: string,
+    updateAuthDto: UpdateAuthDto
+  ): Promise<ApiResponse<string>> {
+    try {
+      const { firstName, lastName, username, password, avatar } = updateAuthDto;
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(password, salt);
+      await this.authModel.findOneAndUpdate(
+        { username: userName },
+        {
+          firstName,
+          lastName,
+          username,
+          password: hashedPassword,
+          avatar,
+        },
+        { new: true }
+      );
+      return {
+        data: '',
+        message: 'Kullanıcı bilgileri güncellendi.',
+        statusCode: 200,
+        isSuccessful: true,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        message: 'Bir hata oluştu. Lütfen tekrar deneyiniz.',
+        statusCode: 500,
+        isSuccessful: false,
+      };
+    }
+  }
+
   async getAuth(auth: Auth): Promise<ApiResponse<Auth>> {
-    console.log(auth);
     const user = await this.authModel
       .findOne({ _id: auth.id, isActive: true })
       .exec();

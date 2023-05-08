@@ -12,6 +12,7 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from './jwt/gql-auth.guard';
 import { GetUser } from './decorators/get-user.decorator';
 import { AuthDto } from './dto/auth.dto';
+import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Resolver()
 export class AuthResolver {
@@ -30,6 +31,19 @@ export class AuthResolver {
     @Args('loginDto') loginDto: LoginDto
   ): Promise<ApiResponse<string>> {
     const auth = await this.authService.login(loginDto);
+    return auth;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => ResponseAuthLogin)
+  async updateUserProfile(
+    @Args('username') username: string,
+    @Args('updateAuthDto') updateAuthDto: UpdateAuthDto
+  ): Promise<ApiResponse<string>> {
+    const auth = await this.authService.updateUserProfile(
+      username,
+      updateAuthDto
+    );
     return auth;
   }
 

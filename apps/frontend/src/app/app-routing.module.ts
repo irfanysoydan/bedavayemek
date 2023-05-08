@@ -12,10 +12,12 @@ import { GetReviewDetailsComponent } from './modules/review/get-review-details/g
 import { EditPostComponent } from './modules/post/edit-post/edit-post.component';
 import { GetReviewsComponent } from './modules/review/get-reviews/get-reviews.component';
 import { EditReviewComponent } from './modules/review/edit-review/edit-review.component';
+import { ProfileComponent } from './modules/auth/profile/profile.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'posts', component: GetPostsComponent, canActivate: [AuthGuard] },
@@ -50,8 +52,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: ':username',
-    component: HomeComponent,
+    path: 'profile/:username',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
 ];

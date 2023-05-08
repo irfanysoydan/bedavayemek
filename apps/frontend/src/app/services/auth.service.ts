@@ -4,7 +4,12 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ResponseModel } from '../models/response.model';
 import { Apollo } from 'apollo-angular';
-import { CREATE_USER, GET_USER, LOGIN_USER } from '../graphql/auth.graphql';
+import {
+  CREATE_USER,
+  GET_USER,
+  LOGIN_USER,
+  UPDATE_USER_PROFILE,
+} from '../graphql/auth.graphql';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +19,7 @@ export class AuthService {
   CREATE_USER = CREATE_USER;
   LOGIN_USER = LOGIN_USER;
   GET_USER = GET_USER;
-
+  UPDATE_USER_PROFILE = UPDATE_USER_PROFILE;
   registerService(auth: Auth): Observable<ResponseModel> {
     return this.apollo
       .mutate<any>({
@@ -41,6 +46,23 @@ export class AuthService {
       .pipe(
         map((result) => {
           return result.data.login;
+        })
+      );
+  }
+
+  updateUserProfile(username: string, auth: Auth): Observable<ResponseModel> {
+    console.log(auth);
+    return this.apollo
+      .mutate<any>({
+        mutation: this.UPDATE_USER_PROFILE,
+        variables: {
+          username,
+          auth,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.updateUserProfile;
         })
       );
   }

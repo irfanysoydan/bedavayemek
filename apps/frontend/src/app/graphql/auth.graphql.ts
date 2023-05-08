@@ -52,3 +52,14 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const UPDATE_USER_PROFILE = gql`
+  mutation ($username: String!, $updateAuthDto: UpdateAuthDto!) {
+    updateUserProfile(username: $username, updateAuthDto: $updateAuthDto) {
+      data
+      message
+      statusCode
+      isSuccessful
+    }
+  }
+`;
