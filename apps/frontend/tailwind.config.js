@@ -14,6 +14,7 @@ module.exports = {
       oxygen: ['Oxygen', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],
       prosans: ['Pro Sans', 'sans-serif'],
+      poppins: ['Poppins', 'sans-serif'],
     },
     colors: {
       primary: ' #ef4444',
@@ -22,10 +23,10 @@ module.exports = {
       black: '#000000',
       gray: {
         50: '#f9fafb',
-        100: '#f3f4f6',
+        100: '#f3f3f3',
         200: '#e5e7eb',
         300: '#d1d5db',
-        400: '#9ca3af',
+        400: '#686868',
         500: '#6b7280',
         600: '#4b5563',
         700: '#374151',

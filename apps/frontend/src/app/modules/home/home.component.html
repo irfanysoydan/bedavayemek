@@ -1,71 +1,51 @@
 <bedavayemek-sidebar class=" top-0 left-0 w-64 h-screen font-comfortaa "></bedavayemek-sidebar>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
-<div class="md:ml-20 lg:ml-72 px-4 py-8 font-roboto flex flex-row justify-center">
+<div class="md:ml-20 lg:ml-72 px-4 py-8 font-poppins flex flex-row justify-center">
   <div class="flex flex-col xl:flex-row xl:flex-wrap justify-center">
-    <mat-card class="m-3 w-full sm:w-[575px]" style="border: none; box-shadow: none;" *ngFor="let post of posts">
-      <!-- Her bir card postun üst başlığı -->
-      <mat-card-header class="bg-white px-0 flex items-center">
-        <div class="flex flex-row flex-1 items-center">
-          <div mat-card-avatar class="rounded-full overflow-hidden mx-2 mt-3 "><img [src]="post.auth?.avatar"></div>
+    <div class="w-full bg-white sm:w-[575px] border-solid rounded-[25px] flex flex-col mx-6 my-2 p-4"
+      *ngFor="let post of posts">
 
-          <mat-card-title class="font-bold text-sm ">{{post.auth?.username}}
-          </mat-card-title>
+      <img class="sm:max-w-[575px] sm:h-[400px] rounded-[25px]" [src]="post.image">
+
+      <p class="text-[15px] px-1 py-6">{{post.description}}</p>
+
+      <div class="flex flex-row justify-around items-center font-semibold text-[16px]">
+        <div class="flex flex-row">
+          <button class="flex items-center justify-center space-x-2 rounded-full bg-secondary h-[50px] w-[250px]">
+            <span>YOL TARİFİ AL</span>
+            <img src="../../../assets/send.png">
+          </button>
 
         </div>
-        <div class="flex flex-col flex-1 text-right">
-          <mat-card-subtitle class="text-sm">{{post.expireDate | date:'dd/MM/yy'}} {{post.expireDate |
-            date:'HH.mm'}}'a kadar geçerli</mat-card-subtitle>
-          <div class="flex items-center justify-end">
-            <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
-              <mat-icon [ngStyle]="{
-                  'color': rating <= (post?.rating ?? 0) ? 'yellow' : 'gray',
-                  'font-size': '20px'
-                }" title="{{post.rating}}/5">
-                star
-              </mat-icon>
-            </ng-container>
+        <div class="flex flex-row">
+          <p style="margin-bottom: 0;"> KALAN SÜRE:&nbsp;</p>
+          <p style="margin-bottom: 0;" class="font-normal">28 DAKİKA</p>
+        </div>
+
+      </div>
+
+      <hr class="mt-4">
+
+      <div class="flex flex-row text-gray-400 justify-around font-semibold text-[20px] mt-5 mb-3">
+        <div class="flex flex-row space-x-4">
+          <img [src]="post.auth!.avatar" class="rounded-full max-w-20 h-20">
+          <div class="flex flex-col justify-center space-y-2">
+            <p style="margin-bottom: 0;" class="text-black">{{post.auth!.username}}</p>
+            <p style="margin-bottom: 0;" class="text-[12px]">{{post.createdAt | date:'dd MMMM'}} {{post.createdAt | date:'HH.mm'}}</p>
           </div>
         </div>
-      </mat-card-header>
-      <!-- Her bir card postun üst başlığı -->
-
-      <!-- Her bir card postun içeriği -->
-      <mat-card-content>
-
-        <!-- Post Görseli -->
-        <div class="flex justify-center mb-4">
-          <img class="h-96" [src]="post.image">
-
-        </div>
-        <!-- Post Görseli -->
-
-        <!-- Yol Tarifi Butonu -->
-        <div class="flex justify-center mb-6">
-          <button mat-raised-button class="w-full" color="accent">
-            <a href="{{post.location}}" class="text-sm font-semibold text-black w-full uppercase">Yol Tarifi Al </a>
+        <div class="flex flex-row justify-between space-x-6 items-center text-[16px]">
+          <button class="flex items-center space-x-2">
+            <span>74</span>
+            <img src="../../../assets/comment.png" class="w-[40px]">
+          </button>
+          <button class="flex items-center space-x-2">
+            <span>12B</span>
+            <img src="../../../assets/like.png" class="w-[40px]">
           </button>
         </div>
-        <!-- Yol Tarifi Butonu -->
-
-        <!-- Açıklama Bölümü -->
-        <p *ngIf="post.description!.length <= 100">{{post.description}}</p>
-        <p *ngIf="post.description!.length > 100" (click)="showFullDescriptionClicked(post.id)">{{ showFullDescription.get(post.id) ? post.description :
-          post.description?.substring(0, 100) + '...' }}
-          <a class="text-sm text-secondary cursor-pointer" id="button-{{post.id}}"
-            (click)="showFullDescriptionClicked(post.id)">Devamını Oku
-          </a>
-
-        </p>
-        <!-- Açıklama Bölümü -->
-
-        <!-- Yorum  Bölümü -->
-        <button class="text-gray-400" [routerLink]="['/post',post.id]">Yorumların tümünü görüntüle</button>
-        <!-- Yorum  Bölümü -->
-
-      </mat-card-content>
-      <!-- Her bir card postun içeriği -->
-
-    </mat-card>
+      </div>
+    </div>
 
 
   </div>

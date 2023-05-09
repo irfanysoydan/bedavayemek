@@ -28,4 +28,5 @@ export class AuthDto {
 
   @Field({ nullable: true })
   isActive: boolean;
+
 }

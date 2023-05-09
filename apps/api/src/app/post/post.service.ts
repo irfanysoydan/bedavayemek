@@ -49,7 +49,6 @@ export class PostService {
         .populate('auth')
         .sort({ createdAt: -1 })
         .exec();
-
       return {
         data: posts,
         message: 'Posts fetched',

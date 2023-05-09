@@ -40,9 +40,12 @@ export class Post {
   @Prop({ default: true })
   isActive: boolean;
 
-  @Field(type => Auth, { nullable: true })
+  @Field((type) => Auth, { nullable: true })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Auth' })
   auth: Auth;
+
+  @Field({ nullable: true })
+  createdAt: Date;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

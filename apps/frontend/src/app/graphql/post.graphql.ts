@@ -43,6 +43,7 @@ export const GET_POSTS = gql`
         expireDate
         rating
         isActive
+        createdAt
         auth {
           id
           firstName
