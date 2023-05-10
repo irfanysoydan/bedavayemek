@@ -19,11 +19,11 @@
             <mat-card-subtitle class="text-sm">{{post.expireDate | date:'dd/MM/yy'}} {{post.expireDate |
               date:'HH.mm'}}'a kadar geçerli</mat-card-subtitle>
             <div class="flex items-center justify-end">
-              <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+              <ng-container *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                 <mat-icon [ngStyle]="{
-                  'color': rating <= (post?.rating ?? 0) ? 'yellow' : 'gray',
+                  'color': likeCount <= (post?.likeCount ?? 0) ? 'yellow' : 'gray',
                   'font-size': '20px'
-                }" title="{{post.rating}}/5">
+                }" title="{{post.likeCount}}/5">
                   star
                 </mat-icon>
               </ng-container>

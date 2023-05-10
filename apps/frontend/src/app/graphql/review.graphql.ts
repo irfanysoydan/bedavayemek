@@ -5,7 +5,7 @@ export const CREATE_REVIEW = gql`
     createReview(createReviewDto: $review, postId: $postId) {
       data {
         id
-        rating
+        likeCount
         comment
         image
         isActive
@@ -16,7 +16,7 @@ export const CREATE_REVIEW = gql`
           image
           location
           expireDate
-          rating
+          likeCount
           isActive
           auth {
             id
@@ -25,7 +25,6 @@ export const CREATE_REVIEW = gql`
             username
             email
             password
-            rating
             avatar
             isActive
           }
@@ -37,54 +36,6 @@ export const CREATE_REVIEW = gql`
           username
           email
           password
-          rating
-          avatar
-          isActive
-        }
-      }
-      message
-      statusCode
-      isSuccessful
-    }
-  }
-
-  mutation ($review: CreateReviewDto!, $postId: String!) {
-    createReview(createReviewDto: $review, postId: $postId) {
-      data {
-        id
-        rating
-        comment
-        image
-        isActive
-        post {
-          id
-          title
-          description
-          image
-          location
-          expireDate
-          rating
-          isActive
-          auth {
-            id
-            firstName
-            lastName
-            username
-            email
-            password
-            rating
-            avatar
-            isActive
-          }
-        }
-        auth {
-          id
-          firstName
-          lastName
-          username
-          email
-          password
-          rating
           avatar
           isActive
         }
@@ -101,7 +52,7 @@ export const GET_REVIEWS_BY_POST_ID = gql`
     getReviewsByPostId(postId: $postId) {
       data {
         id
-        rating
+        likeCount
         comment
         image
         isActive
@@ -112,7 +63,8 @@ export const GET_REVIEWS_BY_POST_ID = gql`
           image
           location
           expireDate
-          rating
+          likeCount
+          reviewCount
           isActive
           auth {
             id
@@ -121,7 +73,6 @@ export const GET_REVIEWS_BY_POST_ID = gql`
             username
             email
             password
-            rating
             avatar
             isActive
           }
@@ -133,7 +84,6 @@ export const GET_REVIEWS_BY_POST_ID = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }
@@ -150,7 +100,7 @@ export const GET_OWN_REVIEWS = gql`
     getOwnReviews {
       data {
         id
-        rating
+        likeCount
         comment
         image
         isActive
@@ -161,7 +111,8 @@ export const GET_OWN_REVIEWS = gql`
           image
           location
           expireDate
-          rating
+          likeCount
+          reviewCount
           isActive
           auth {
             id
@@ -170,7 +121,6 @@ export const GET_OWN_REVIEWS = gql`
             username
             email
             password
-            rating
             avatar
             isActive
           }
@@ -182,7 +132,6 @@ export const GET_OWN_REVIEWS = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }
@@ -199,7 +148,7 @@ export const GET_REVIEW_BY_ID = gql`
     getReviewById(id: $id) {
       data {
         id
-        rating
+        likeCount
         comment
         image
         isActive
@@ -210,7 +159,8 @@ export const GET_REVIEW_BY_ID = gql`
           image
           location
           expireDate
-          rating
+          likeCount
+          reviewCount
           isActive
           auth {
             id
@@ -219,7 +169,6 @@ export const GET_REVIEW_BY_ID = gql`
             username
             email
             password
-            rating
             avatar
             isActive
           }
@@ -231,7 +180,6 @@ export const GET_REVIEW_BY_ID = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }

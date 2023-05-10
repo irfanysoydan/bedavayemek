@@ -29,13 +29,13 @@
               </div>
 
               <div class="flex items-center text-base justify-end h-1/3">
-                {{review.post?.rating}}
+                {{review.post?.likeCount}}
 
-                <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+                <ng-container *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                   <mat-icon [ngStyle]="{
-                      'color': rating <= (review.post!.rating) ? '#FFD700' : '#808080',
+                      'color': likeCount <= (review.post!.likeCount) ? '#FFD700' : '#808080',
                       'font-size': '20px'
-                    }" title="{{review.post?.rating}}/5">
+                    }" title="{{review.post?.likeCount}}/5">
                     star
                   </mat-icon>
                 </ng-container>
@@ -66,11 +66,11 @@
               <mat-card-subtitle class="text-sm">{{review.createdAt | date:'dd/MM/yyyy'}} {{review.createdAt |
                 date:'HH.mm'}}</mat-card-subtitle>
               <div class="flex items-center justify-end">
-                <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+                <ng-container *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                   <mat-icon [ngStyle]="{
-                    'color': rating <= (review.rating) ? '#FFD700' : '#808080',
+                    'color': likeCount <= (review.likeCount) ? '#FFD700' : '#808080',
                     'font-size': '20px'
-                  }" title="{{review.rating}}/5">
+                  }" title="{{review.likeCount}}/5">
                     star
                   </mat-icon>
                 </ng-container>

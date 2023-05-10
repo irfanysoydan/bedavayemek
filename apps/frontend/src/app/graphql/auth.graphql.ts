@@ -10,7 +10,6 @@ export const CREATE_USER = gql`
         username
         email
         password
-        rating
         avatar
         isActive
       }
@@ -42,7 +41,6 @@ export const GET_USER = gql`
         username
         email
         password
-        rating
         avatar
         isActive
       }

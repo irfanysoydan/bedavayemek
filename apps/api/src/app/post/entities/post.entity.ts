@@ -33,8 +33,12 @@ export class Post {
   expireDate: string;
 
   @Field({ nullable: true })
-  @Prop({ default: 0.0 })
-  rating: number;
+  @Prop({ default: 0})
+  likeCount: number;
+
+  @Field({ nullable: true })
+  @Prop({ default: 0})
+  reviewCount: number;
 
   @Field({ nullable: true })
   @Prop({ default: true })

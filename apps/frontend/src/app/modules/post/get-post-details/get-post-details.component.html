@@ -24,11 +24,11 @@
             <mat-card-subtitle class="text-sm">{{post.createdAt | date:'dd/MM/yyyy'}} {{post.createdAt |
               date:'HH.mm'}}</mat-card-subtitle>
             <div class="flex items-center justify-end">
-              <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+              <ng-container *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                 <mat-icon [ngStyle]="{
-                    'color': rating <= (post.rating) ? '#FFD700' : '#808080',
+                    'color': likeCount <= (post.likeCount) ? '#FFD700' : '#808080',
                     'font-size': '20px'
-                  }" title="{{post.rating}}/5">
+                  }" title="{{post.likeCount}}/5">
                   star
                 </mat-icon>
               </ng-container>
@@ -89,7 +89,7 @@
                 <span id="star5" class="text-2xl text-gray-500 hover:text-yellow-400 cursor-pointer"
                   (click)="rate(5)"><mat-icon>star</mat-icon></span>
               </div>
-              <input type="hidden" id="rating">
+              <input type="hidden" id="likeCount">
 
               <!-- Resim Seçimi -->
               <div class="flex flex-col justify-center items-center">
@@ -130,11 +130,11 @@
                   <hr class="mb-2">
                 </ng-container>
                 <div class="flex flex-row">
-                  <ng-container class="w-full" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                  <ng-container class="w-full" *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                     <mat-icon [ngStyle]="{
-                        'color': rating <= (review.rating) ? '#FFD700' : '#808080',
+                        'color': likeCount <= (review.likeCount) ? '#FFD700' : '#808080',
                         'font-size': '20px'
-                      }" title="{{review.rating}}/5">
+                      }" title="{{review.likeCount}}/5">
                       star
                     </mat-icon>
                   </ng-container>

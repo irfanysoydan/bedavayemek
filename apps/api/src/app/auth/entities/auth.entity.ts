@@ -30,10 +30,6 @@ export class Auth {
   password: string;
 
   @Field({ nullable: true })
-  @Prop({ default: 0.0 })
-  rating: number;
-
-  @Field({ nullable: true })
   @Prop()
   avatar: string;
 

@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { ReviewModule } from './review/review.module';
+import { LikeModule } from './like/like.module';
 
 @Module({
   imports: [
@@ -23,8 +24,9 @@ import { ReviewModule } from './review/review.module';
     AuthModule,
     PostModule,
     ReviewModule,
+    LikeModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      include: [AuthModule, PostModule, ReviewModule],
+      include: [AuthModule, PostModule, ReviewModule, LikeModule],
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),

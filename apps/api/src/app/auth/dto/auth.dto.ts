@@ -21,9 +21,6 @@ export class AuthDto {
   password: string;
 
   @Field({ nullable: true })
-  rating: number;
-
-  @Field({ nullable: true })
   avatar: string;
 
   @Field({ nullable: true })

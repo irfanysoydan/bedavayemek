@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
@@ -17,11 +18,8 @@ export class HomeComponent implements OnInit {
 
   isLoading = false;
   posts: Post[] = [];
-  reviews: Review[] = [];
   constructor(
     private postService: PostService,
-    private reviewService: ReviewService,
-    private _snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
@@ -31,22 +29,21 @@ export class HomeComponent implements OnInit {
   getPosts() {
     this.isLoading = true;
     this.postService.getPosts().subscribe((data) => {
-      console.log(data);
       if (!data.isSuccessful) {
         this.isLoading = false;
         return;
       }
+
       this.posts = data.data;
       this.isLoading = false;
     });
   }
 
-  getReviewsByPostId(postId: string) {
-    this.reviewService.getReviewsByPostId(postId).subscribe((data) => {
+  like(postId: string) {
+    this.postService.likePost(postId).subscribe((data) => {
       if (!data.isSuccessful) {
         return;
       }
-      this.reviews = data.data;
     });
   }
 

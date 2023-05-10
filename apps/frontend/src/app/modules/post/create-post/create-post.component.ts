@@ -44,7 +44,8 @@ export class CreatePostComponent implements OnInit {
       title: this.form.value.title,
       description: this.form.value.description,
       image: this.dataURI,
-      rating: 0,
+      likeCount: 0,
+      reviewCount: 0,
       location: this.form.value.location,
       expireDate: this.form.value.expireDate,
     };

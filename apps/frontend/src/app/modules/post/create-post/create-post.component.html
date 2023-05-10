@@ -2,66 +2,16 @@
 
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
 <div class="md:ml-20 lg:ml-72 px-4 py-8 font-roboto flex justify-center">
-  <div class="flex flex-row border rounded p-4 w-full xl:w-[950px]">
-    <form [formGroup]="form" class="flex flex-col md:flex-row w-full xl:w-[950px]">
-
-      <div class="flex flex-col justify-center items-center">
-        <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[300px] h-[200px] object-contain">
-        <div class="flex justify-center items-center w-[300px] h-[100px] object-contain">
-          <label for="image"
-            class="py-2 px-4 bg-gray-500 text-white rounded-lg cursor-pointer">
-            Resim Seçin
-          </label>
-          <input type="file" class="hidden" id="image" (change)="onFileSelected($event)" formControlName="image">
-        </div>
-      </div>
-
-      <mat-card class="h-[600px] w-full xl:w-[600px] flex justify-center" style="border:none; box-shadow:none;">
-        <p class="text-xl font-semibold flex self-center"> Paylaşım Yap </p>
-        <mat-card-content class="text-xs">
-
-          <div class="flex flex-col">
-            <label>Başlık</label>
-            <mat-form-field class="text-lg" appearance="outline">
-              <input class="resize-none" matInput placeholder="Başlık giriniz" formControlName="title">
-            </mat-form-field>
-          </div>
-
-          <div class="flex flex-col">
-            <label>Açıklama</label>
-            <mat-form-field class="text-lg" appearance="outline">
-              <textarea style="resize: none; height: 150px;" matInput placeholder="Açıklama giriniz"
-                formControlName="description"></textarea>
-            </mat-form-field>
-          </div>
-
-          <div class="flex flex-col">
-            <label>Konum</label>
-            <mat-form-field class="text-lg" appearance="outline">
-              <input matInput placeholder="Konum giriniz" formControlName="location">
-            </mat-form-field>
-          </div>
-
-          <div class="flex flex-col">
-            <label>Sona Erme Tarihi</label>
-            <mat-form-field class="text-lg" appearance="outline">
-              <input type="datetime-local" matInput placeholder="Tarih giriniz" formControlName="expireDate">
-
-            </mat-form-field>
-          </div>
-
-          <div class="flex justify-center">
-            <button mat-raised-button color="accent" type="button" (click)="createPost()">
-              <a class="text-sm text-black uppercase">Paylaş
-              </a>
-            </button>
-          </div>
 
 
-        </mat-card-content>
-
-      </mat-card>
-    </form>
-
+  <div class="flex flex-col justify-center items-center">
+    <img *ngIf="dataURI" [src]="dataURI" alt="Resim" class="w-[425px] h-[325px] rounded-[25px]">
+    <div class="flex justify-center items-center w-[300px] h-[100px] object-contain">
+      <label for="image" class="py-2 px-4 bg-gray-500 hover:bg-gray-600 text-white rounded-lg cursor-pointer">
+        Resim Seçin
+      </label>
+      <input type="file" class="hidden" id="image" (change)="onFileSelected($event)">
+    </div>
   </div>
+
 </div>

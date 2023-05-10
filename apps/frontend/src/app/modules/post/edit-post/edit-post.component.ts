@@ -67,7 +67,7 @@ export class EditPostComponent implements OnInit {
       title: this.form.value.title,
       description: this.form.value.description,
       image: this.dataURI,
-      rating: this.post.rating,
+      likeCount: this.post.likeCount,
       location: this.form.value.location,
       expireDate: this.form.value.expireDate,
     };

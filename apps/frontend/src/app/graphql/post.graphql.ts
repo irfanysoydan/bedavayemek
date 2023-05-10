@@ -10,7 +10,8 @@ export const CREATE_POST = gql`
         image
         location
         expireDate
-        rating
+        likeCount
+        reviewCount
         isActive
         auth {
           id
@@ -41,7 +42,8 @@ export const GET_POSTS = gql`
         image
         location
         expireDate
-        rating
+        likeCount
+        reviewCount
         isActive
         createdAt
         auth {
@@ -51,7 +53,6 @@ export const GET_POSTS = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }
@@ -73,7 +74,8 @@ export const GET_OWN_POSTS = gql`
         image
         location
         expireDate
-        rating
+        likeCount
+        reviewCount
         isActive
         auth {
           id
@@ -82,7 +84,6 @@ export const GET_OWN_POSTS = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }
@@ -104,7 +105,8 @@ export const GET_POST_BY_ID = gql`
         image
         location
         expireDate
-        rating
+        likeCount
+        reviewCount
         isActive
         auth {
           id
@@ -113,7 +115,6 @@ export const GET_POST_BY_ID = gql`
           username
           email
           password
-          rating
           avatar
           isActive
         }
@@ -139,6 +140,17 @@ export const DELETE_POST = gql`
 export const UPDATE_POST = gql`
   mutation ($id: String!, $post: CreatePostDto!) {
     updatePostById(id: $id, createPostDto: $post) {
+      data
+      message
+      statusCode
+      isSuccessful
+    }
+  }
+`;
+
+export const LIKE_POST = gql`
+  mutation ($postId: String!) {
+    likePost(postId: $postId) {
       data
       message
       statusCode

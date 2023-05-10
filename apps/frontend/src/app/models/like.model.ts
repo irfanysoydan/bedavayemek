@@ -1,12 +1,8 @@
 import { Auth } from './auth.model';
 import { Post } from './post.model';
 
-export class Review {
+export class Like {
   id!: string;
-  likeCount!: number;
-  comment?: string | null;
-  image?: string | null;
-  isActive?: boolean;
   post?: Post | null;
   auth?: Auth | null;
   createdAt?: Date;

@@ -19,12 +19,12 @@ export class PostService {
     auth: Auth
   ): Promise<ApiResponse<Post>> {
     try {
-      const { title, description, rating, image, location, expireDate } =
+      const { title, description, likeCount, image, location, expireDate } =
         createPostDto;
       let post = await this.postModel.create({
         title,
         description,
-        rating,
+        likeCount,
         image,
         location,
         expireDate: new Date(expireDate),
@@ -120,7 +120,7 @@ export class PostService {
     createPostDto: CreatePostDto
   ): Promise<ApiResponse<string>> {
     try {
-      const { title, description, rating, image, location, expireDate } =
+      const { title, description, likeCount, image, location, expireDate } =
         createPostDto;
       await this.postModel
         .findByIdAndUpdate(
@@ -128,7 +128,7 @@ export class PostService {
           {
             title,
             description,
-            rating,
+            likeCount,
             image,
             location,
             expireDate: new Date(expireDate),
@@ -173,4 +173,5 @@ export class PostService {
       throw new InternalServerErrorException();
     }
   }
+
 }

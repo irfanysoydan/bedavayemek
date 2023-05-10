@@ -32,7 +32,7 @@ export class EditReviewComponent implements OnInit {
   reviewId = '';
   review!: Review;
   isLoading = false;
-  ratingInput = 0;
+  likeCountInput = 0;
   dataURI = '';
 
   getReviewById() {
@@ -61,7 +61,7 @@ export class EditReviewComponent implements OnInit {
       id: '',
       comment: this.commentForm.value.comment,
       image: this.dataURI,
-      rating: this.ratingInput,
+      likeCount: this.likeCountInput,
     };
 
     this.reviewService
@@ -102,6 +102,6 @@ export class EditReviewComponent implements OnInit {
       document.getElementById('star' + i)?.classList.remove('text-yellow-400');
       document.getElementById('star' + i)?.classList.add('text-gray-500');
     }
-    this.ratingInput = value;
+    this.likeCountInput = value;
   }
 }

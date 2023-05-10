@@ -22,9 +22,9 @@ export class ReviewService {
     postId: string
   ): Promise<ApiResponse<Review>> {
     try {
-      const { rating, comment, image } = createReviewDto;
+      const { likeCount, comment, image } = createReviewDto;
       let review = await this.reviewModel.create({
-        rating,
+        likeCount,
         comment,
         image,
         auth,
@@ -137,11 +137,11 @@ export class ReviewService {
     auth: Auth
   ): Promise<ApiResponse<string>> {
     try {
-      const { rating, comment, image } = updateReviewDto;
+      const { likeCount, comment, image } = updateReviewDto;
       const review = await this.reviewModel
         .findOneAndUpdate(
           { _id: id, auth: auth.id, isActive: true },
-          { rating, comment, image },
+          { likeCount, comment, image },
           { new: true }
         )
         .exec();

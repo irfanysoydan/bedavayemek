@@ -9,6 +9,7 @@ import {
   GET_OWN_POSTS,
   GET_POSTS,
   GET_POST_BY_ID,
+  LIKE_POST,
   UPDATE_POST,
 } from '../graphql/post.graphql';
 import { Apollo } from 'apollo-angular';
@@ -35,6 +36,7 @@ export class PostService {
   GET_POST_BY_ID = GET_POST_BY_ID;
   DELETE_POST = DELETE_POST;
   UPDATE_POST = UPDATE_POST;
+  LIKE_POST = LIKE_POST;
 
   createPost(post: Post): Observable<ResponseModel> {
     return this.apollo
@@ -117,6 +119,21 @@ export class PostService {
       .pipe(
         map((result) => {
           return result.data.updatePostById;
+        })
+      );
+  }
+
+  likePost(postId: string): Observable<ResponseModel> {
+    return this.apollo
+      .mutate<any>({
+        mutation: this.LIKE_POST,
+        variables: {
+          postId,
+        },
+      })
+      .pipe(
+        map((result) => {
+          return result.data.likePost;
         })
       );
   }

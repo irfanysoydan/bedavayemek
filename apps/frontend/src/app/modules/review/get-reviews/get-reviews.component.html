@@ -31,12 +31,12 @@
 
           <mat-card-content class="flex flex-row">
             <div class="text-xs">
-              <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+              <ng-container *ngFor="let likeCount of [1, 2, 3, 4, 5]">
                 <mat-icon [ngStyle]="{
-                    'color': rating <= (review.rating) ? '#FFD700' : '#808080',
+                    'color': likeCount <= (review.likeCount) ? '#FFD700' : '#808080',
                     'font-size': '20px',
                     'margin-right': '-6px'
-                  }" title="{{review.rating}}/5">
+                  }" title="{{review.likeCount}}/5">
                   star
                 </mat-icon>
               </ng-container>

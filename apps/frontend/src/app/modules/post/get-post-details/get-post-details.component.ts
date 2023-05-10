@@ -36,7 +36,7 @@ export class GetPostDetailsComponent implements OnInit {
   post!: Post;
   reviews: Review[] = [];
   isLoading = false;
-  ratingInput = 0;
+  likeCountInput = 0;
   dataURI = '';
 
   getPostById(postId: string) {
@@ -77,7 +77,7 @@ export class GetPostDetailsComponent implements OnInit {
     this.isLoading = true;
     const review: Review = {
       id: '',
-      rating: this.ratingInput,
+      likeCount: this.likeCountInput,
       image: this.dataURI,
       comment: this.commentForm.value.comment,
     };
@@ -89,7 +89,7 @@ export class GetPostDetailsComponent implements OnInit {
         this.isLoading = false;
         return;
       }
-      if (review.rating === 0 || this.dataURI === '') {
+      if (review.likeCount === 0 || this.dataURI === '') {
         this._snackBar.open('Lütfen tüm alanları doldurunuz', 'Tamam', {
           duration: 2000,
         });
@@ -98,8 +98,8 @@ export class GetPostDetailsComponent implements OnInit {
       }
       this.isLoading = false;
 
-      this.post.rating =
-        (this.post.rating * this.reviews.length + review.rating) /
+      this.post.likeCount =
+        (this.post.likeCount * this.reviews.length + review.likeCount) /
         (this.reviews.length + 1);
 
       this.postService
@@ -142,6 +142,6 @@ export class GetPostDetailsComponent implements OnInit {
       document.getElementById('star' + i)?.classList.remove('text-yellow-400');
       document.getElementById('star' + i)?.classList.add('text-gray-500');
     }
-    this.ratingInput = value;
+    this.likeCountInput = value;
   }
 }

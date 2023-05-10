@@ -5,7 +5,7 @@ import { IsString, IsNumber } from 'class-validator';
 export class CreateReviewDto {
   @Field({ nullable: true })
   @IsNumber()
-  rating: number;
+  likeCount: number;
 
   @Field({ nullable: true })
   @IsString()

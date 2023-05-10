@@ -7,7 +7,8 @@ export class Post {
   image?: string | null;
   location?: string | null;
   expireDate?: string | null;
-  rating!: number;
+  likeCount!: number;
+  reviewCount!: number;
   isActive?: boolean;
   auth?: Auth;
   createdAt?: Date;

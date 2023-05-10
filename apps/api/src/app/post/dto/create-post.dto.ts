@@ -17,7 +17,11 @@ export class CreatePostDto {
 
   @Field({ nullable: true })
   @IsNumber()
-  rating: number;
+  likeCount: number;
+
+  @Field({ nullable: true })
+  @IsNumber()
+  reviewCount: number;
 
   @Field({ nullable: true })
   @IsString()
