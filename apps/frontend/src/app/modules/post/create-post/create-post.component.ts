@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Post } from '../../../models/post.model';
 import { PostService } from '../../../services/post.service';
 import { Router } from '@angular/router';
 

@@ -27,9 +27,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { GoogleMapsModule } from "@angular/google-maps"
 
 import { HeaderComponent } from './layouts/header/header.component';
 import { SideabarComponent } from './layouts/sidebar/sidebar.component';
+import { MapComponent } from './modules/map/map.component';
 import { HeaderAuthComponent } from './layouts/header-auth/header-auth.component';
 import { GetPostsComponent } from './modules/post/get-posts/get-posts.component';
 import { CreatePostComponent } from './modules/post/create-post/create-post.component';
@@ -66,10 +68,12 @@ const httpOptions: HttpHeaders = new HttpHeaders({
     GetReviewsComponent,
     EditReviewComponent,
     ProfileComponent,
+    MapComponent,
   ],
   imports: [
     ApolloModule,
     BrowserModule,
+    GoogleMapsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
